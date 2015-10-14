@@ -1,18 +1,29 @@
 #Dynamic Programming and Working Backward
 
-Dynamic programming is the method for solving optimization problem.  
+**Dynamic programming** is the method for solving optimization problem.  
 Optimization problem is that the problem has several solutions , but we have a specific answer certain maximum or minimum value .
 Dynamic programming consists of 3 steps.
 
-Step 1) Analysis optimized answer (최적화된 해답의 구조 분석 )
+Step 1) Analysis optimized answer 
 
-Step 2) Define answer by recursive function (해답을 재귀식으로 정의 )
+Step 2) Define answer by recursive function
 
-Step 3) Calculate by Down-Top approach (상향식으로 최적값을 계산 )
+Step 3) Calculate answer by Down-Top approach
 
-Working Backward is the method used in Step 1. This is not the way solving from initial value to result, but solving by deriving from optimized result to before steps.  
+Step 4) Calculate ***solution*** by table
+
+**Working Backward** is the method used in Step 1. This is not the way solving from initial value to result, but solving by deriving from optimized result to before steps.  
 Then we can easily solve problem by recursion.  
 		
+We can need only optimized answer or not only answer but also groups that derive the answer in optimization problems.  
+In first case, when we need only the optimized answer, we don't need Step4.
+But, in second case, we need to some tricks in Step4.
+
+**Example for Step 4 )** Exchange Coin
+
+We had paid in coins and we have to give change. In this situation, if we want to use fewest coins, how can we exchange coins?
+
+It seems like easy work but, it's little bit complicate work when we want to generalize this problem.
 		
 
 #\*ACM Programming Contest   Problem : Merging Files
