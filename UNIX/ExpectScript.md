@@ -23,5 +23,5 @@ Basic expect commands
 	
 
 This is my expect script for connect to raspberryPi via ssh.  
-I found some easy example codes that can practice expect script.
+I found some easy example codes that can practice expect script.  
 **http://www.thegeekstuff.com/2010/10/expect-examples/**
