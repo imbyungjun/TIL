@@ -10,7 +10,7 @@ There's three steps in divide and conquer algorithm.
 **Step 3) Combine**  
 - Combining small problems's answer and make the original problem's answer.
 
-***Example )*** Binary Search  
+**Example ) Binary Search**  
 
 	int a[] = {12, 15, 20, 26, 33, 40, 51, 64, 70};
 
@@ -42,3 +42,46 @@ Example Code:
 				return binarySearch(arr, mid+1, right, value);
 		}
 	}
+	
+	
+**Example ) Merge Sort**
+
+	void merge(int a[], int low, int mid, int high) {
+		int i, j, k;
+		int tmp[MAXSIZE];
+		
+		if (low === high)
+			return;
+		
+		for (i=low; i<=high; i++)
+			tmp[i] = a[i];
+			
+		i = k = low;
+		j = mid+1;
+		
+		while(i <= mid && j <= high) 
+			if (tmp[i] <= tmp[j])
+				a[k++] = tmp[i++];
+			else
+				a[k++] = tmp[j++];
+			
+		while(i <= mid)
+			a[k++] = tmp[i++];
+			
+		while(j <= high)
+			a[k++] = tmp[j++];
+	}
+	
+	void mergeSort(int a[], int low, int high) {
+		int mid;
+		
+		if(low == high)
+			return;
+		else {
+			mid = (low + high) / 2;
+			mergeSort(a, low, mid);
+			mergeSort(a, mid+1, high);
+			merge(a, low, mid, high);
+		}
+	}
+	

@@ -2,14 +2,14 @@
 //  Find out smallest cost of merging files
 //  cost = fsize1 + fsize2
 
-#include <stdio.h>
-#include <stdlib.h>
+	#include <stdio.h>
+	#include <stdlib.h>
+	
+	#define MAXSIZE 500
+	#define MAXIMUM 9999999
 
-#define MAXSIZE 500
-#define MAXIMUM 9999999
-
-int getCost(int arr[], int begin, int last) {
-    int i, min = MAXIMUM;
+	 int getCost(int arr[], int begin, int last) {
+		int i, min = MAXIMUM;
     int sum;
     
     if (begin == last) return arr[begin];
@@ -19,7 +19,7 @@ int getCost(int arr[], int begin, int last) {
         if (min > sum) min = sum;
     }
     return min;
-}
+	} 
 
 void mergeFile() {
     int i, size;
