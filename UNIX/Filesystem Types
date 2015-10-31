@@ -1,0 +1,25 @@
+#Linux filesystem types. (Ext2, Ext3, Ext4)
+-
+1 ) **Ext2**
+
+* Ext2 stands for second extended file system.
+* Ext2 doesn't have journaling feature.
+* On flash memory, it is recommanded.
+* Mazimum individual file size can be from 16 GB ~ 2 TB
+* Overall ext2 file system size can be from 2 TB ~ 32 TB
+
+2 ) **Ext3**
+
+* Ext3 stands for third extended file system.
+* Ext3 allows journaling.
+* Journaling has a dedicated area in the file system, where all the changes are tracked. When the system crashes, the possibility of file system corruption is less because of journaling.
+* Maximum individual file size can be from 16 GB to 2 TB
+* Overall ext3 file system size can be from 2 TB to 32 TB
+
+3 ) **Ext4**
+
+* Ext4 stands for fourth extended file system.
+* Supports huge individual file size and overall file system size.
+* Maximum individual file size can be from 16 GB to 16 TB
+* Overall maximum ext4 file system size is 1 EB (exabyte). 1 EB = 1024 PB (petabyte). 1 PB = 1024 TB (terabyte).
+* You can also mount an existing ext3 fs as ext4 fs (without having to upgrade it).
