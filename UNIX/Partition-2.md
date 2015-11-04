@@ -97,3 +97,10 @@ If you want to unmount the filesystem.
 	$ sudo umount /home/
 	
 It works but, I don't know yet if it correctly works.
+
+#If you can't umount directory.
+(when "device is busy" occured)
+
+	$ fuser -ck /your/mounted/dir
+	
+This command kills all processes that using the directory.
