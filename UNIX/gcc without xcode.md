@@ -11,6 +11,7 @@ There's way to install gcc without xcode.
 
 Find "Command Line Tools" and download it.
 
+-
 
 I think it's little bit different with normal gcc. 
 When I use gcc without any argument...
