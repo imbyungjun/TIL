@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
         exit(-1);
     }
  
-    //Server displays received message
+    //Server displays recieved message
     printf("SERVER receives:\n");
     printf("%s\n", msg.buffer);
  
