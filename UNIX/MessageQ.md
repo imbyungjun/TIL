@@ -1,10 +1,8 @@
 #MessageQ
--
 Message queue is one of methods for advanced InterProcess Communications.  
 Each message has a type. So we can read messages with a specific type.
 
 #System call
--
 <big>1 ) msgget</big>   
 Access to existing message queue or make new message queue.
 
@@ -82,7 +80,6 @@ IPC\_RMID : remove message queue
 -
 #Implement Client-Server using message queue
 
--
 Example Code )
 
 	#include ...
