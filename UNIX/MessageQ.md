@@ -86,6 +86,18 @@ IPC\_RMID : remove message queue
 Example Code )
 
 	#include ...
+
+	#define KEY 1234L
+	
+	typedef struct  {
+		long msg_to;
+		long msg_fm;
+		char buffer[BUFSIZ];
+	} MESSAGE;
+	
+	MESSAGE msg;
+
+	int msqid = msgget(KEY, IPC_CREAT | 0644);
 	
 	if (msgsnd(msqid, &msg, sizeof(msg.buffer), 0) == -1) {
 		perror("msgsnd");
