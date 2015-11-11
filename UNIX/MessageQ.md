@@ -82,4 +82,19 @@ IPC\_RMID : remove message queue
 -
 #Implement Client-Server using message queue
 
+-
+Example Code )
+
+	#include ...
+	
+	if (msgsnd(msqid, &msg, sizeof(msg.buffer), 0) == -1) {
+		perror("msgsnd");
+		exit(-1);
+	}
+
+	if (msgrcv(msqid, &msg, sizeof(msg), msg.type, 0) < 0) {
+		perror("msgrcv");
+		exit(-1);
+	}
+
 
