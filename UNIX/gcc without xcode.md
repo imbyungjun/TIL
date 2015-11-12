@@ -7,7 +7,7 @@ There's way to install gcc without xcode.
 
     $ xcode-select --install
     
-2 ) Download it from **Apple's developer site**
+2 ) Download it from [Apple's developer site](https://developer.apple.com/downloads/)
 
 Find "Command Line Tools" and download it.
 
