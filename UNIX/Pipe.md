@@ -3,15 +3,14 @@
 **Pipe** is one of interprocess communication(IPC) method in UNIX.   
 
 * **Two constraint of pipe**
+		int pipe(int filedes[2]);
+				returns: 0 if OK, -1 on Error
+				
+		filedes[0] : open for reading  
+		filedes[1] : open for writing
 	- Half-duplex : data flows only in one direction.
 	- Can be used between processes that have common ancestor.  
-	
-	int pipe(int filedes[2]);
-			returns: 0 if OK, -1 on Error
-				
-	filedes[0] : open for reading  
-	filedes[1] : open for writing
-	
+
 * **Pipes - parent and child processes**
 	
 		parent => child				child => parent
