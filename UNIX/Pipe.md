@@ -1,5 +1,5 @@
 #Pipe
--
+
 **Pipe** is one of interprocess communication(IPC) method in UNIX.   
 
 * **Two constraint of pipe**
@@ -19,7 +19,9 @@
 	- If writer close fd, send EOF to reader.
 	- If reader close fd, generate SIGPIPE, write got signal and return -1.
 
--
+![Pipe figure1](https://github.com/imbyungjun/TIL/blob/master/UNIX/img_01.jpg)
+
+---
 * **dup**  
 
 		int dup(int filedes);  
@@ -30,8 +32,8 @@
  		int dup2(int fd1, int fd2);
  				returns: file descriptor number, -1 on Error
  	Allocate fd2 as fd1.
- 	
--
+
+
 #Example  
 	
 	#include <fcntl.h>
