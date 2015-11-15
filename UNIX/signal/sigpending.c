@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 static void sig_quit(int);
+
 int main() {
 	sigset_t newmask, oldmask, pendmask;
 
