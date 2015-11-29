@@ -1,3 +1,12 @@
+/*
+ * Rm.c
+ *
+ * 주어진 파일을 삭제한다.
+ * 쓰기권한이 없을 경우 삭제여부를
+ * 사용자에게 질의한다.
+ */
+
+
 #include <unistd.h>
 #include <errno.h>
 #include <stdio.h>
@@ -11,6 +20,7 @@
 #define FLAG_I 0x02
 #define MAXLENGTH 256
 
+/* return permission info */
 char *getPerm(const struct stat stat_buf) {
 	char *perm = (char *) malloc (sizeof(char) * 10);
 
@@ -28,7 +38,7 @@ char *getPerm(const struct stat stat_buf) {
 	return perm;
 }
 
-void opt_rm(int opt, const char *file_name) {
+void my_rm(int opt, const char *file_name) {
 	char ans[MAXLENGTH], *perm;
 	struct stat stat_buf;
 	struct group *g;
@@ -108,6 +118,6 @@ int main(int argc, char **argv) {
 	else i = 2;				/* 옵션이 명시된 경우 */
 
 	for (; i < argc; i++) {
-		opt_rm(opt, argv[i]);
+		my_rm(opt, argv[i]);
 	}
 }

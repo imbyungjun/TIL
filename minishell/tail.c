@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
 	/* 매개변수로 파일이 입력되지 않은 경우 */
 	if (argc < 2) print_tail(lines, stdin);
 
-	if (argc < 2) multi_operand = 1;
+	if (argc > 2) multi_operand = 1;
 
 	while (--argc > 0) {
 		if ((fp = fopen(argv[optind++], "r")) == NULL) {

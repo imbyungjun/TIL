@@ -10,7 +10,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define STDOUT 1
 #define BUFSIZE 4096
 
 /* read from fp and write to stdout */
@@ -63,7 +62,7 @@ int main(int argc, char **argv) {
 			flag = 0;
 			continue;
 		}
-
+		
 		if (flag++ && argc > 0) 
 			printf("\n");
 

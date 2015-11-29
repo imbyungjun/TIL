@@ -1,13 +1,11 @@
+#include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 
-#define BUFSIZE 4096
+/* 
+ * getenv함수를 이용하여 CWD를 얻고 
+ * 표준출력으로 출력한다.
+ */
 
 int main() {
-	char buf[BUFSIZE];
-
-	if (getcwd(buf, BUFSIZE) == NULL)
-		perror("getcwd error");
-	else
-		printf("%s\n", buf);
+	printf("%s\n", getenv("PWD"));
 }
