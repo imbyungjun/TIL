@@ -1,3 +1,11 @@
+/*
+ * Head.c
+ *
+ * 주어진 라인수 만큼 파일 또는 표준입력에서
+ * 읽어서 표준출력으로 출력하는 프로그램.
+ */
+
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -5,6 +13,7 @@
 #define STDOUT 1
 #define BUFSIZE 4096
 
+/* read from fp and write to stdout */
 void print_head(int lines, FILE *fp) {
 	char buf[BUFSIZE];
 	
@@ -12,8 +21,10 @@ void print_head(int lines, FILE *fp) {
 		printf("%s", buf);
 }
 
+/* print usage and exit */
 void print_usage() {
 	fprintf(stderr, "usage: head [-n lines] [file ...]\n");
+	exit(1);
 }
 
 int main(int argc, char **argv) {
@@ -36,11 +47,15 @@ int main(int argc, char **argv) {
 				break;
 			default :		/* unexpected options */
 				print_usage();
-				exit(1);
 		}
 	}
 
+	/* 매개변수로 파일이 입력되지 않은경우 */
+	if (argc < 2) print_head(lines, stdin);
+
+	/* flag for multiple operands */
 	if (argc > 2) multi_operand = 1;
+
 	/* print head */
 	while (--argc > 0) {
 		if ((fp = fopen(argv[optind++], "r")) == NULL) {
@@ -49,7 +64,7 @@ int main(int argc, char **argv) {
 			continue;
 		}
 
-		if (flag++ && argc > 1) 
+		if (flag++ && argc > 0) 
 			printf("\n");
 
 		if (multi_operand) 
