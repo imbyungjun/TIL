@@ -1,3 +1,15 @@
+/*
+ * mkdir.c
+ *
+ * 컴퓨터공학부
+ * 20113316 임병준
+ *
+ * 주어진 경로에 해당 디렉토리를 생성하는 프로그램.
+ * -p 옵션은 생성할 디렉토리의 경로를 명시할때,
+ * 만약 중간과정의 디렉토리들이 존재하지 않는다면
+ * 그 디렉토리들도 모두 만들어주는 옵션이다.
+ */
+
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
@@ -6,12 +18,6 @@
 #define PERM 0777
 #define MAX_LEN 256
 #define FLAG_P 0x01
-
-/* 
- * -p 옵션은 생성할 디렉토리의 경로를 명시할때,
- * 만약 중간과정의 디렉토리들이 존재하지 않는다면
- * 그 디렉토리들도 한번에 만들어주는 옵션이다.
- */
 
 /* -p 옵션을 입력받은 경우의 수행 */
 void opt_p(char *path_name) {
@@ -24,17 +30,17 @@ void opt_p(char *path_name) {
 	do {
 		strcat(prePath, dir);
 		strcat(prePath, "/");
-		
-		/* EEXIST 에러는 무시 */	
+
+		/* ignore EEXIST error */
 		if(mkdir(prePath, PERM) < 0) {
 			if (errno == EEXIST) continue;
 			perror("mkdir error");
 			exit(2);
 		}
-	} while ((dir = strtok(NULL, "/"))); 
+	} while ((dir = strtok(NULL, "/")));
 }
 
-/* 사용법을 출력하고 종료 */
+/* print usage and exit */
 void print_usage() {
 	fprintf(stderr, "usage: mkdir [-p] directory ...\n");
 	exit(1);
@@ -43,26 +49,26 @@ void print_usage() {
 int main(int argc, char **argv) {
 	int i, ch, opt = 0;
 
-	/* 매개변수는 2개 이상이어야한다. */
-	if (argc < 2) 
+	/* argc must be > 1 */
+	if (argc < 2)
 		print_usage();
-	
-	/* -p 옵션이 주어졌는지 확인한다. */
+
+	/* option handler */
 	if ((ch = getopt(argc, argv, "p")) != -1) {
-		switch (ch) {		
+		switch (ch) {
 			case 'p':
 				opt |= FLAG_P;
 				break;
 			default :
-				exit(1);
+				print_usage();
 		}
 	}
 
-	if (opt & FLAG_P) {
-		for (i = 2; i < argc; i++) 
+	if (opt & FLAG_P) {		/* option -p */
+		for (i = 2; i < argc; i++)
 			opt_p(argv[i]);
-	} else {
-		for (i = 1; i < argc; i++) 
+	} else {		/* default option */
+		for (i = 1; i < argc; i++)
 		if (mkdir(argv[i], PERM) < 0) {
 			if (errno == EEXIST) {
 				warn("%s", argv[i]);

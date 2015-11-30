@@ -1,7 +1,17 @@
+/*
+ * chmod.c
+ *
+ * 컴퓨터공학부
+ * 20113316 임병준
+ *
+ * 주어진 8진수옵션으로 입력파일의
+ * 접근권한을 변경하는 프로그램.
+ */
+
 #include <sys/stat.h>
 #include <stdio.h>
 
-/* 사용법 출력 */
+/* print usage and exit */
 void print_usage() {
 	fprintf(stderr, "usage:  chmod mode file ...\n");
 	exit(0);
@@ -15,11 +25,11 @@ int main(int argc, char **argv) {
 	if (argc < 3)
 		print_usage();
 
-	/* 옵션을 8진수로 입력받음 */
+	/* get option as octal number */
 	perm = strtol(argv[1], (char**)NULL, 8);
 
-	/* 뒤이어 전달받는 모든 파일을 해당 모드로 변환 */
-	for (i = 2; i < argc; i++) 
+	/* change permission */
+	for (i = 2; i < argc; i++)
 		if (chmod(argv[i], perm) < 0)
 			warn("%s", argv[i]);
 }

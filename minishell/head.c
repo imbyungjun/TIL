@@ -1,8 +1,11 @@
 /*
- * Head.c
+ * head.c
+ *
+ * 컴퓨터공학부
+ * 20113316 임병준
  *
  * 주어진 라인수 만큼 파일 또는 표준입력에서
- * 읽어서 표준출력으로 출력하는 프로그램.
+ * 읽어서 가장 앞부분부터 표준출력으로 출력하는 프로그램.
  */
 
 
@@ -10,13 +13,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define BUFSIZE 4096
-
 /* read from fp and write to stdout */
-void print_head(int lines, FILE *fp) {
-	char buf[BUFSIZE];
-	
-	while(lines-- && fgets(buf, BUFSIZE, fp))
+void my_head(int lines, FILE *fp) {
+	char buf[BUFSIZ];
+
+	while(lines-- && fgets(buf, BUFSIZ, fp))
 		printf("%s", buf);
 }
 
@@ -28,7 +29,7 @@ void print_usage() {
 
 int main(int argc, char **argv) {
 	int ch, lines = 10;			/* default lines value = 10 */
-	int multi_operand = 0, flag = 0;
+	int multi_operand = 0, newline_flag = 0;
 	FILE *fp;
 	extern char* optarg;		/* option argument */
 	extern int optind;			/* option index */
@@ -49,27 +50,29 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	/* 매개변수로 파일이 입력되지 않은경우 */
-	if (argc < 2) print_head(lines, stdin);
+	/* no input file, read from stdin */
+	if (argc < 2) my_head(lines, stdin);
 
 	/* flag for multiple operands */
 	if (argc > 2) multi_operand = 1;
 
-	/* print head */
 	while (--argc > 0) {
+		/* file open */
 		if ((fp = fopen(argv[optind++], "r")) == NULL) {
 			warn("%s", argv[optind-1]);
-			flag = 0;
+			newline_flag = 0;
 			continue;
 		}
-		
-		if (flag++ && argc > 0) 
+
+		/* newline for multiple operands */
+		if (newline_flag++)
 			printf("\n");
 
-		if (multi_operand) 
+		/* print file name for multiple operands */
+		if (multi_operand)
 			printf("==> %s <==\n", argv[optind-1]);
 
-		print_head(lines, fp);
+		my_head(lines, fp);
 		fclose(fp);
-	}	
+	}
 }

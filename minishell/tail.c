@@ -1,8 +1,11 @@
 /*
- * Tail.c
+ * tail.c
+ *
+ * 컴퓨터공학부
+ * 20113316 임병준
  *
  * 주어진 라인수 만큼 파일 또는 표준입력에서
- * 읽어서 표준출력으로 출력하는 프로그램.
+ * 읽어서 가장 뒷부분부터 표준출력으로 출력하는 프로그램.
  */
 
 
@@ -10,25 +13,29 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#define BUFSIZE 4096
-
 /* read from fp and wrtie to stdout */
-void print_tail(int lines, FILE *fp) {
+void my_tail(int lines, FILE *fp) {
 	int i, cnt = 0;
 	int p;
-	char **buf = (char **)malloc(sizeof(char*) * lines);
+	char **buf;
 
-	for (i = 0; i < lines; i++) 
-		buf[i] = (char *)malloc(sizeof(char) * BUFSIZE);
+	/* memory allocation for tail buffer */
+	buf = (char **)malloc(sizeof(char*) * lines);
+	for (i = 0; i < lines; i++)
+		buf[i] = (char *)malloc(sizeof(char) * BUFSIZ);
 
-	while (fgets(buf[++cnt%lines], BUFSIZE, fp)) { }
-	
-	p = cnt % lines;
+	/* read file while fill tail buffer */
+	while (fgets(buf[cnt++%lines], BUFSIZ, fp)) { }
 
+	/* offset of current buffer index */
+	p = (--cnt) % lines;
+
+	/* flush buffer while reach the offset */
 	do {
 		printf("%s", buf[cnt++%lines]);
 	} while (p != cnt % lines);
 
+	/* memory free */
 	for (i = 0; i < lines; i++)
 		free(buf[i]);
 	free(buf);
@@ -42,7 +49,7 @@ void print_usage() {
 
 int main(int argc, char **argv) {
 	int ch, lines = 10;
-	int multi_operand = 0, flag = 0;
+	int multi_operand = 0, newline_flag = 0;
 	FILE *fp;
 	extern char* optarg;
 	extern int optind;
@@ -63,25 +70,28 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	/* 매개변수로 파일이 입력되지 않은 경우 */
-	if (argc < 2) print_tail(lines, stdin);
+	/* no input file, read from stdin */
+	if (argc < 2) my_tail(lines, stdin);
 
+	/* flag for multiple operands */
 	if (argc > 2) multi_operand = 1;
 
 	while (--argc > 0) {
+		/* file open */
 		if ((fp = fopen(argv[optind++], "r")) == NULL) {
 			warn("%s", argv[optind-1]);
-			flag = 0;
+			newline_flag = 0;
 			continue;
 		}
-
-		if (flag++ && argc > 0)
+		/* newline for multiple operands */
+		if (newline_flag++ && argc > 0)
 			printf("\n");
 
+		/* print file name for multiple operands */
 		if (multi_operand)
 			printf("==> %s <==\n", argv[optind-1]);
 
-		print_tail(lines, fp);
+		my_tail(lines, fp);
 		fclose(fp);
 	}
 }
