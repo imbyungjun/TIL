@@ -19,12 +19,12 @@
 #define MAX_LEN 256
 #define FLAG_P 0x01
 
-/* -p 옵션을 입력받은 경우의 수행 */
+/* -p option */
 void opt_p(char *path_name) {
 	char prePath[MAX_LEN] = "";
 	char *dir;
 
-	/* 경로상의 모든 디렉토리를 생성한다. */
+	/* make all direcotries on path */
 	dir = strtok(path_name, "/");
 
 	do {
