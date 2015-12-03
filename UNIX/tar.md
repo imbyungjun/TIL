@@ -39,5 +39,5 @@ $ tar -zxvf xxx.tar.gz
 Example ) Uncompress tar.gz into different directory
 
 ```
-$ tar -zxvf xxx.tar.gz
+$ tar -zxvf xxx.tar.gz -C ../other/dir
 ```

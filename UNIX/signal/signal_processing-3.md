@@ -38,3 +38,15 @@ int sigpending (sigset_t *set);
 #####- The set of signals is returned through the *set* argument
 
 ####3. Sigaction Function
+```
+#include <signal.h>
+int sigaction (int signo, const struct sigaction *act, strcut sigaction *oact);
+	Returns: 0 if OK, -1 on error
+
+
+struct sigaction {
+	void	(*sa_handler)(int);		/* address of signal handler */
+	sigset_t	sa_mask;			/* additional signals to block */
+	int		sa_flags;				/* signal options */
+	void	(*sa_sigaction)(int, siginfo_t *, void *);
+```
