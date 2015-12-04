@@ -32,4 +32,16 @@ mysql> GRANT RELOAD, PROCESS ON *.* TO 'admin'@'localhost';
 mysql> CREATE USER 'dummy'@'localhost';
 ```
 
+###4. Grant to specific databases
+```
+mysql> CREATE USER 'user_name'@'localhost' IDENTIFIED BY 'passwd';
+mysql> GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP
+	->	ON bankaccount.*
+	->	TO 'user_name'@'localhost';	
+```
+
+###5. See privileges for a user
+```
+mysql> SHOW GRANTS FOR 'user_name'@'localhost';
+```
 [Go to mysql manual page](http://dev.mysql.com/doc/refman/5.7/en/adding-users.html)
