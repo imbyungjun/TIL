@@ -27,7 +27,7 @@ Enter password:
 * You can use mysql after change your 'root' password. So you must change your 'root' password.
 
 	```
-mysql> ALTER USER 'root@*' IDENTIFIED BY 'new_passwd';
+mysql> ALTER USER 'root'@'%' IDENTIFIED BY 'new_passwd';
 	```
 	
 #If you forgot password
