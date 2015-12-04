@@ -43,5 +43,11 @@ mysql> GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP
 ###5. See privileges for a user
 ```
 mysql> SHOW GRANTS FOR 'user_name'@'localhost';
++---------------------------------------------------------------------------------+
+| Grants for imb@%                                                                |
++---------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'imb'@'%'                                                 |
+| GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP ON `homework`.* TO 'imb'@'%' |
++---------------------------------------------------------------------------------+
 ```
 [Go to mysql manual page](http://dev.mysql.com/doc/refman/5.7/en/adding-users.html)
