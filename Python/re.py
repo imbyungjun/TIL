@@ -62,3 +62,9 @@ print 'span() -', m.span()
 
 print '*************************'
 
+# raw string
+p = re.compile('\\\\section')
+print p.search(r'\\section')
+
+p = re.compile(r'\\section')
+print p.search('\\\\section')
