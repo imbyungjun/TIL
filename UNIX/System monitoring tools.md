@@ -1,7 +1,8 @@
 #System Monitoring tools
----
+
 #1. Sar
-<big>By using **sar**, you can monitor performance of various system information.  
+<big>
+By using **sar**, you can monitor performance of various system information.  
 **Sar** is part of the sysstat package, so you can install **sar** by installing sysstat. (sysstat also includes sadf, mpstat, iostat, tapestat, pidstat, cifsiostat and sa tools.)  
 sar는 시스템의 활동로그를 수집하여 시스템의 부하량을 예측하고 사용자가 대처할 수 있도록 하는 명령어.
 ###Options
@@ -9,10 +10,76 @@ sar는 시스템의 활동로그를 수집하여 시스템의 부하량을 예�
 \- b : I/O와 transfer의 통계를 백분율로 출력.  
 \- B : 페이징 통계를 출력한다.  
 \- c : 새롭게 만들어져 활동하고있는 프로세스를 출력한다.  
-\- e : 리포트의 종료시간을 설정한다. 시간표시형식은 hh:mm:dd 24시간 format을 사용해야하며 기본 종료 시간은 18:00이다.
-\- r : 메모리와 스왑 공간의 이용 통계를 출력한다.
-</big>
+\- e : 리포트의 종료시간을 설정한다. 시간표시형식은 hh:mm:dd 24시간 format을 사용해야하며 기본 종료 시간은 18:00이다.  
+\- r : 메모리와 스왑 공간의 이용 통계를 출력한다.  
 
+---
+\- u : 모든 CPU의 현재사용정보를 출력한다.
+
+usage:
+
+```
+$ sar -u 1 3        # "1 3" reports for every 1 seconds for 3 times.
+Linux 4.1.18-v7+ (raspberrypi) 	13/03/16 	_armv7l_	(4 CPU)
+
+08:20:17        CPU     %user     %nice   %system   %iowait    %steal     %idle
+08:20:18        all      0.00      0.00      0.25      0.00      0.00     99.75
+08:20:19        all      0.00      0.00      0.25      0.00      0.00     99.75
+08:20:20        all      0.00      0.00      0.25      0.00      0.00     99.75
+Average:        all      0.00      0.00      0.25      0.00      0.00     99.75
+```
+
+\- r : This option reports memory statistics. Memory free and used.
+
+```
+$ sar -r 1 3
+Linux 4.1.18-v7+ (raspberrypi) 	13/03/16 	_armv7l_	(4 CPU)
+
+17:25:58    kbmemfree kbmemused  %memused kbbuffers  kbcached  kbcommit   %commit  kbactive   kbinact   kbdirty
+17:25:59       607064    340996     35.97     46152    205356    594508     56.60    200864     95352         8
+17:26:00       607048    341012     35.97     46152    205356    594508     56.60    200864     95352         8
+17:26:01       607080    340980     35.97     46152    205356    594508     56.60    200872     95352         8
+Average:       607064    340996     35.97     46152    205356    594508     56.60    200867     95352         8
+```
+
+\- S : Reports swap statistics. Swap space used.
+
+```
+$ sar -S 1 3
+Linux 4.1.18-v7+ (raspberrypi) 	13/03/16 	_armv7l_	(4 CPU)
+
+17:27:08    kbswpfree kbswpused  %swpused  kbswpcad   %swpcad
+17:27:09       102396         0      0.00         0      0.00
+17:27:10       102396         0      0.00         0      0.00
+17:27:11       102396         0      0.00         0      0.00
+Average:       102396         0      0.00         0      0.00
+```
+
+\- b : I/O statistics. Overall I/O activities.
+
+```
+$ sar -b 1 3
+Linux 4.1.18-v7+ (raspberrypi) 	13/03/16 	_armv7l_	(4 CPU)
+
+17:33:29          tps      rtps      wtps   bread/s   bwrtn/s
+17:33:30       317.00      0.00    317.00      0.00   2536.00
+17:33:31       190.00      0.00    190.00      0.00   1520.00
+17:33:32       493.00      0.00    493.00      0.00   3944.00
+Average:       333.33      0.00    333.33      0.00   2666.67
+```
+
+\- w : Reports total number of processes created per second, and total number of context switches per second.
+
+```
+$ sar -w 1 3
+Linux 4.1.18-v7+ (raspberrypi) 	13/03/16 	_armv7l_	(4 CPU)
+
+17:35:44       proc/s   cswch/s
+17:35:45         0.00    164.00
+17:35:46         0.00    199.00
+17:35:47         0.00    153.00
+Average:         0.00    172.00
+```
 
 #2. Tcpdump
 **Tcpdump** prints all of packet header go through the network interfaces that satisfy a given condition.
@@ -34,7 +101,7 @@ TTL 필드를 이용해서 hop수를 알아내고 TTL값이 줄어들어서 폐�
 
 ###Options
 \- n : Print mapping of IP addresses without host name.  
-\- w <sec>: Set response wait time
+\- w <second>: Set response wait time
 \- 
 
 
