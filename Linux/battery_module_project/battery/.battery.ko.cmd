@@ -1,0 +1,1 @@
+cmd_/home/pi/Desktop/systech/module/battery/battery.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/pi/Desktop/systech/module/battery/battery.ko /home/pi/Desktop/systech/module/battery/battery.o /home/pi/Desktop/systech/module/battery/battery.mod.o
