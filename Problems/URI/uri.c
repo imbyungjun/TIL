@@ -13,7 +13,7 @@ void decodeURI() {
 
 	for (i = 0; i < strlen(str); i++) {
 		if (str[i] == '%') {
-			memcpy(&hex, &str[i+1], 2);
+			memcpy(&hex, &str[i+1], 2 * sizeof(char));
 			printf("%c", (char)strtol(hex, 0, 16));
 			i += 2;
 		} else {
