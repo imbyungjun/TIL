@@ -60,10 +60,9 @@ static struct proc_dir_entry *threshold_entry;
 struct task_struct *my_task;
 /* End of declaration */
 
-/* Declaration of varibales for device */
+/* Declaration for device */
 
 static int Device_Open = 0;
-
 static char Message[BUF_LEN];
 static char *Message_Ptr;
 
@@ -79,6 +78,7 @@ static int device_open(struct inode *inode, struct file *file)
 	try_module_get(THIS_MODULE); 
 	return SUCCESS;
 }
+
 static int device_release(struct inode *inode, struct file *file) {
     /* Now ready for next caller */
     Device_Open--; 
@@ -123,8 +123,9 @@ long device_ioctl(struct file *file, unsigned int ioctl_num, unsigned long ioctl
 
 /* End of device */
 
+
 /*
-        Implementation of procfs write function
+        Implementation of write function for procfs battery_test
 */
 static ssize_t test_level_write( struct file *filp, const char *user_space_buffer, size_t len, loff_t *off )
 {
@@ -144,12 +145,6 @@ static ssize_t test_level_write( struct file *filp, const char *user_space_buffe
     }
 
     status = kstrtoint(test_level_buffer, 10, &requested);
-	
-	if (status == -ERANGE) {
-		printk(KERN_INFO "OUT OF RANGE\n");
-	} else if (status == -EINVAL) {
-		printk(KERN_INFO "PARSING ERROR\n");
-	}
 
     if(status < 0)
     {
@@ -157,19 +152,20 @@ static ssize_t test_level_write( struct file *filp, const char *user_space_buffe
         return -ENOMEM;
     }
 
-    // validate level value.
+    /* level value check */
     if(requested < 0 || requested > level){
         printk(KERN_INFO "Invalid battery level.\n");
         return -ENOMEM;
     }
 
-	// accept value.
+	/* accept value. */
     test_level = requested;
 
+    /* Find task by pid */
 	my_task = pid_task(find_vpid(notify_pid), PIDTYPE_PID);
 
 	/* Send signal to userspace */
-	if (test_level < threshold && battery_status != BATTERY_LOW) {
+	if (test_level <= threshold && battery_status != BATTERY_LOW) {
 		battery_status = BATTERY_LOW;
 		printk(KERN_INFO "Low battery\n");
 		send_sig(SIGUSR1, my_task, 0);
@@ -178,15 +174,17 @@ static ssize_t test_level_write( struct file *filp, const char *user_space_buffe
 		printk(KERN_INFO "High battery\n");
 		send_sig(SIGUSR2, my_task, 0);
 	} else if (test_level >= level) {
-		printk(KERN_INFO "Full charged\n");
+		printk(KERN_INFO "Fully charged\n");
 	}
 
     return test_level_buffer_size;
 }
 
+/*
+        Implementation of write function for procfs battery_notify
+*/
 static ssize_t notify_write( struct file *filp, const char *user_space_buffer, size_t len, loff_t *off )
 {
-
     int status = 0;
     int requested;
 
@@ -214,9 +212,11 @@ static ssize_t notify_write( struct file *filp, const char *user_space_buffer, s
     notify_pid = requested;
 
     return notify_buffer_size;
-
 }
 
+/*
+        Implementation of write function for procfs battery_threshold
+*/
 static ssize_t threshold_write( struct file *filp, const char *user_space_buffer, size_t len, loff_t *off )
 {
 
@@ -237,11 +237,6 @@ static ssize_t threshold_write( struct file *filp, const char *user_space_buffer
 
     status  = kstrtoint(threshold_buffer, 10, &requested);
 
-	if (status == -ERANGE) 
-		printk(KERN_INFO "OUT OF RANGE\n");
-	else if (status == -EINVAL)
-		printk(KERN_INFO "PARSING ERROR\n");
-
     if(status < 0)
     {
         printk(KERN_INFO "Error while called kstrtoint(...)\n");
@@ -257,13 +252,11 @@ static ssize_t threshold_write( struct file *filp, const char *user_space_buffer
     threshold = requested;
 
     return threshold_buffer_size;
-
 }
 
 
-
 /*
-        Implementation of procfs read function
+        Implementation of read function for procfs battery_test
 */
 static int test_level_read( struct file *filp, char *user_space_buffer, size_t count, loff_t *off )
 {
@@ -280,7 +273,6 @@ static int test_level_read( struct file *filp, char *user_space_buffer, size_t c
     else if(*off == test_level_buffer_size)
         return 0;
     
-
     if(test_level_buffer_size - *off > count)
         ret = count;
     else
@@ -294,10 +286,11 @@ static int test_level_read( struct file *filp, char *user_space_buffer, size_t c
     *off += ret;
 
     return ret;
-
 }
 
-
+/*
+        Implementation of read function for procfs battery_notify
+*/
 static int notify_read( struct file *filp, char *user_space_buffer, size_t count, loff_t *off )
 {
     int ret = 0;
@@ -318,7 +311,6 @@ static int notify_read( struct file *filp, char *user_space_buffer, size_t count
     else
         ret = notify_buffer_size - *off;
 
-
     flag = copy_to_user(user_space_buffer, notify_buffer + (*off), ret);
 
     if(flag < 0)
@@ -327,10 +319,11 @@ static int notify_read( struct file *filp, char *user_space_buffer, size_t count
     *off += ret;
 
     return ret;
-
 }
 
-
+/*
+        Implementation of read function for procfs battery_threshold
+*/
 static int threshold_read( struct file *filp, char *user_space_buffer, size_t count, loff_t *off )
 {
     int ret = 0;
@@ -360,7 +353,6 @@ static int threshold_read( struct file *filp, char *user_space_buffer, size_t co
     *off += ret;
 
     return ret;
-
 }
 
 /*
@@ -383,7 +375,8 @@ static const struct file_operations threshold_fops = {
     .read = threshold_read,
 };
 
-/* Device */
+
+/* Device file_operations */
 struct file_operations chardev_fops = {
     .read = device_read,
     .unlocked_ioctl = device_ioctl,
@@ -393,29 +386,26 @@ struct file_operations chardev_fops = {
 /* Device end */
 
 /*
-    This function will be called on initialization of  kernel module
+    This function will be called on initialization of kernel module
 */
 int init_module(void)
 {
-
 	int ret = 0;
 
-	printk(KERN_INFO "Battery module initialized\n");
+	printk(KERN_INFO "Battery module initialize\n");
 
     test_level_entry = proc_create(PROCFS_TESTLEVEL, 0666, NULL, &test_level_fops);
     notify_entry = proc_create(PROCFS_NOTIFYPID, 0666, NULL, &notify_fops);
     threshold_entry = proc_create(PROCFS_THRESHOLD, 0666, NULL, &threshold_fops);
 
-    if(test_level_entry == NULL || notify_entry == NULL || threshold_entry == NULL)
+    if(!test_level_entry || !notify_entry || !threshold_entry)
     {
        return -ENOMEM;
     }
 	
-	/* Device */
+	/* Regist character device */
     ret = register_chrdev(MAJOR_NUM, DEVICE_FILE_NAME, &chardev_fops);
-    /*
-    * Negative values signify an error 
-    */
+    
     if (ret < 0) {
         printk(KERN_ALERT "%s failed with %d\n",
         "Registering the character device ", ret); 
@@ -424,7 +414,6 @@ int init_module(void)
     
 	printk(KERN_INFO "%s The major device number is %d.\n",
         "Registeration is a success", MAJOR_NUM);
-    printk(KERN_INFO "If you want to talk to the device driver,\n"); 
 	printk(KERN_INFO "you have to create a device file. \n");
     printk(KERN_INFO "mknod %s c %d 0\n", DEVICE_FILE_NAME, MAJOR_NUM); 
  
@@ -442,6 +431,6 @@ void cleanup_module(void)
 	remove_proc_entry(PROCFS_NOTIFYPID, NULL);
 	remove_proc_entry(PROCFS_THRESHOLD, NULL);
 
-	/* clean up device */
+	/* Unregist character device */
 	unregister_chrdev(MAJOR_NUM, DEVICE_FILE_NAME);
 }

@@ -40,12 +40,12 @@ void sig_set() {
 
 	sigaction(SIGINT, &act, 0);
 	sigaction(SIGQUIT, &act, 0);
-}	
+}
 
 /* Signal handler */
 static void sig_handler(int signo) {
 	switch (signo) {
-		case SIGUSR1 : 
+		case SIGUSR1 :
 			write(2, "절전모드\n", 13); break;
 		case SIGUSR2 :
 			write(2, "일반모드\n", 13); break;
@@ -53,7 +53,7 @@ static void sig_handler(int signo) {
 			write(2, "Received: SIGINT\n",18); break;
 		case SIGQUIT :
 			write(2, "Received: SIGQUIT\n", 20); break;
-		default : 
+		default :
 			write(2, "Received: Undefined Sigal\n", 11); break;
 	}
 }
@@ -72,13 +72,13 @@ int set_pid() {
 
 	if ((child = fork()) == 0) {		/* child */
 		fd = open (BATTERY_NOTIFY, O_WRONLY | O_EXCL | O_TRUNC);
-		if (fd < 0) { 
+		if (fd < 0) {
 			perror("set pid failed");
 			exit(1);
 		}
 
 		dup2(fd, STDOUT);
-        
+
 		execl("/bin/echo", "echo", buf, NULL);
 		perror("execl echo error");
 		exit(127);
@@ -109,7 +109,7 @@ void set_threshold(char *thr) {
 		}
 
 		dup2(fd, STDOUT);
-		
+
 		execl("/bin/echo", "echo", thr, NULL);
 		perror("execl echo error");
 		exit(127);
@@ -123,13 +123,14 @@ int main(int argc, char *argv[]) {
 		printf("Usage :\n%s [threshold]\n", argv[0]);
 		exit(0);
 	}
-		
-	if (set_pid() < 0) 
+
+	if (set_pid() < 0)
 		perror("set pid error");
 
 	set_threshold(argv[1]);
-	
+
 	sig_set();		//sigaction()
 
 	for ( ; ; ) pause();
 }
+

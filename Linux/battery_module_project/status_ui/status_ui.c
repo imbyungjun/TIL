@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fcntl.h> /* open */
-#include <unistd.h> /* exit */
-#include <sys/ioctl.h> /* ioctl */
+#include <fcntl.h> 		/* open */
+#include <unistd.h> 	/* exit */
+#include <sys/ioctl.h> 	/* ioctl */
 
 #define MAX_SIZE 1024
 #define INTERVAL 1
@@ -60,3 +60,4 @@ int main() {
 		close(fd);
 	}
 }
+
