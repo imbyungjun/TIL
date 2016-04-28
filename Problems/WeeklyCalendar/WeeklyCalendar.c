@@ -1,3 +1,10 @@
+/*
+ * Weekly Calendar
+ *
+ * Print a week belong to input 
+ *
+ */
+
 #include <stdio.h>
 #include <string.h>
 
@@ -12,6 +19,7 @@ int day_per_month[] = {
 	31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 
+/* return nth day */
 int getday(char *day) {
 	int i;
 
