@@ -19,7 +19,7 @@
 	- If writer close fd, send EOF to reader.
 	- If reader close fd, generate SIGPIPE, write got signal and return -1.
 
-![Pipe figure1](https://github.com/imbyungjun/TIL/blob/master/UNIX/img_01.jpg)
+![Pipe figure1](img_01.jpg)
 
 ---
 * **dup**  
