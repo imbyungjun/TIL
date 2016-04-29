@@ -6,30 +6,29 @@
 - Xcode 7.3
 
 ###1. You need to
-#####Download OpenCV
+####Download OpenCV
 Click download OpenCV for Linux/Mac at here.  **http://opencv.org/downloads.html**  
 
-#####Download XCode
+####Download XCode
 You can download Xcode in App Store.  
 
-#####Install Command line tools
+####Install Command line tools
 ```
 $ xcode-select --install
 ```
-#####Install Brew
+####Install Brew
 ```
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-
-#####Install Cmake
+####Install Cmake
 ```
 $ brew install cmake
 ```
 	
 ###2. Install
 
-#####1) Unzip OpenCV-3.1.0 at ~/OpenCV directory.  
+####1) Unzip OpenCV-3.1.0 at ~/OpenCV directory.  
 Open terminal and type this command.
 
 ```
@@ -38,7 +37,7 @@ $ cd Downloads/
 $ unzip opencv-3.1.0.zip -d ~/OpenCV/
 ```
 
-#####2) Build OpenCV  
+####2) Build OpenCV  
 Open terminal and type these commands.
 
 ```
@@ -50,13 +49,13 @@ $ sudo make install
 
 ###3. Create OpenCV project in Xcode
 
-#####1) Open Xcode and select create a new project.  
+####1) Open Xcode and select create a new project.  
 Select OS X - Command Line Tool.
 
-#####2) Input your product name and set language to C++
+####2) Input your product name and set language to C++
 In this case, I give a name as "OpenCV_Test".
 
-#####3) Assigning the Search Paths
+####3) Assigning the Search Paths
 - Click your project then, you can see four tabs in main window.  
 - Click Build Settings and option All.  
 - Scroll down until you find **Search Paths**
@@ -73,7 +72,7 @@ In this case, I give a name as "OpenCV_Test".
     /usr/local/lib
     ```	
    
-#####4) Add opencv frameworks
+####4) Add opencv frameworks
 - Make a new group at left side bar.
 - Click Add Files to "OpenCV_Test"...
 - Type **/usr/local/lib**
@@ -81,7 +80,7 @@ In this case, I give a name as "OpenCV_Test".
 
 Now, you can build your opencv project.
 
-#####5) Location proeference
+####5) Location proeference
 - Open Xcode preferences, select location tab.  
 - Click Advanced.  
 - Change the location button from Unique to Legacy.  
@@ -116,5 +115,5 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-#####If you can see a window like this, you're ready for opencv programming.
+####If you can see a window like this, you're ready for opencv programming.
 ![opencv_example_result](result.png)
