@@ -1,0 +1,8 @@
+syntax enable
+set number
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+"set expandtab
+"if you want to set configure for all users,
+"make file /etc/vim/vimrc.local 

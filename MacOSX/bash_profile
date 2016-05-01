@@ -1,0 +1,8 @@
+# aliases
+alias l="ls -al"
+alias cd..="cd .."
+alias clr=“clear”
+
+# path color
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
