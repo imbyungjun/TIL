@@ -1,8 +1,8 @@
 <?php
     $host="localhost";
-    $login="root";
-    $passwd="imb";
-    $name="iot";
+    $login="user";
+    $passwd="passwd";
+    $name="DBname";
        
     $db =  mysql_connect($host,$login,$passwd);
     mysql_select_db($name);    

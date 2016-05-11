@@ -6,9 +6,9 @@ var mysql = require("mysql");
 // Create a connection to the db
 var conn = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "imb",
-	database: "iot"
+    user: "user",
+    password: "passwd",
+	database: "DBname"
 });
 
 // Connect to db
