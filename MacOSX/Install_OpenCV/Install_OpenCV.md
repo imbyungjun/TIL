@@ -60,7 +60,7 @@ In this case, I give a name as "OpenCV_Test".
 - Click Build Settings and option All.  
 - Scroll down until you find **Search Paths**
 
-- Edit Library Search Paths options as
+- Edit Header Search Paths options as
 
     ```
     /usr/local/include
@@ -80,7 +80,7 @@ In this case, I give a name as "OpenCV_Test".
 
 Now, you can build your opencv project.
 
-####5) Location proeference
+####5) Location preference
 - Open Xcode preferences, select location tab.  
 - Click Advanced.  
 - Change the location button from Unique to Legacy.  
