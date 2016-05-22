@@ -9,7 +9,7 @@ But there's the way to continue our long job when we logout, or terminate contro
 
 	$ nohup ./a.out
 	
-But, nowadays Linux unset huponexit option, so there can be some people that can continue their jobs when they exit their terminal.
+But, recent Linux unset huponexit option, so people can continue their jobs when they exit their terminal.
 
 If you want to check your Linux's huponexit option,
 
