@@ -30,11 +30,11 @@ void endian() {
 		strcat(str[i/8], digit);
 	}
 
-	for (i = 0; i < 4; i++)
-		invert(str[i]);
+	//for (i = 0; i < 4; i++)
+	//	invert(str[i]);
 
 	for (i = 3; i >= 0; i--) 
-		for (j = 7; j >= 0; j--)
+		for (j = 0; j < 8; j++)
 			sum += (pow(2, cnt++) * (str[i][j] - '0'));
 
 	printf("%ld\n", sum == -1 ? 4294967295 : sum);
