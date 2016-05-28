@@ -1,3 +1,9 @@
+/*
+ * Allergy
+ *
+ * [https://algospot.com/judge/problem/read/ALLERGY]
+ *
+ */
 #include <stdio.h>
 #include <string.h>
 
