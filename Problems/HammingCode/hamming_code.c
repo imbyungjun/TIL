@@ -1,7 +1,7 @@
 /*
  * Hamming Code
  *
- * Print decoded and recovered hamming code message
+ * [https://www.algospot.com/judge/problem/read/HAMMINGCODE]
  *
  */
 
