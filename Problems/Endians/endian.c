@@ -1,3 +1,10 @@
+/* 
+ * Endians
+ *
+ * [https://www.algospot.com/judge/problem/read/ENDIANS]
+ *
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
