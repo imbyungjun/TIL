@@ -20,7 +20,7 @@ brew install tree
 curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/bash_profile -o ~/.bash_profile
 
 # Download vimrc
-curl https://raw.githubusercontent.com/imbyungjun/TIL/blob/master/MacOSX/vimrc -o ~/.vimrc
+curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/vimrc -o ~/.vimrc
 
 # Disable dashboard
 defaults write com.apple.dashboard mcx-disabled -boolean YES && killall Dock
