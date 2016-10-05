@@ -30,3 +30,23 @@ mkdir /Users/imb/Desktop/ScreenShots
 defaults write com.apple.screencapture location /Users/imb/Desktop/ScreenShots
 killall SystemUIServer
 
+# Download icon image
+curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/ScreenShotsIcon.png -o /tmp/icon.png
+
+# Take an image and make the image its own icon:
+sips -i /tmp/icon.png
+
+# Extract the icon to its own resource file:
+/Developer/Tools/DeRez -only icns /tmp/icon.png > /tmp/tmp.rsrc
+
+# Append a resource to the folder you want to icon-ize.
+Rez -append tmpicns.rsrc -o $'ScreenShots/Icon\r'
+
+# Use the resource to set the icon.
+SetFile -a C ScreenShots/
+
+# Hide the Icon\r file from Finder.
+SetFile -a V $'ScreenShots/Icon\r'
+
+# clean up.
+rm /tmp/tmp.rsrc
