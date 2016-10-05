@@ -18,4 +18,16 @@ rm tmpicns.rsrc
 # rm icon.png # probably want to keep this for re-use.
 ```
 
+###Apply on folder
+```
+# Append a resource to the folder you want to icon-ize.
+Rez -append tmpicns.rsrc -o $'myfolder/Icon\r'
+
+# Use the resource to set the icon.
+SetFile -a C myfolder/
+
+# Hide the Icon\r file from Finder.
+SetFile -a V $'myfolder/Icon\r'
+```
+
 [Related link](http://apple.stackexchange.com/questions/6901/how-can-i-change-a-file-or-folder-icon-using-the-terminal)
