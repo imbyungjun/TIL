@@ -1,4 +1,8 @@
+#!/usr/bin/expect
 # This script will configure all of basics settings for me
+
+# Install command line tools
+xcode-select --install
 
 # Install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -17,10 +21,10 @@ brew install tmux
 brew install tree
 
 # Download bash_profile
-curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/bash_profile -o ~/.bash_profile
+curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/Auto_Configure/bash_profile -o ~/.bash_profile
 
 # Download vimrc
-curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/vimrc -o ~/.vimrc
+curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/Auto_Configure/vimrc -o ~/.vimrc
 
 # Disable dashboard
 defaults write com.apple.dashboard mcx-disabled -boolean YES && killall Dock
@@ -31,7 +35,7 @@ defaults write com.apple.screencapture location /Users/imb/Desktop/ScreenShots
 killall SystemUIServer
 
 # Download icon image
-curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/ScreenShotsIcon.png -o /tmp/icon.png
+curl https://raw.githubusercontent.com/imbyungjun/TIL/master/MacOSX/Auto_Configure/ScreenShotsIcon.png -o /tmp/icon.png
 
 # Take an image and make the image its own icon:
 sips -i /tmp/icon.png
