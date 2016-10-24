@@ -6,3 +6,7 @@ set shiftwidth=4
 "set expandtab
 "if you want to set configure for all users,
 "make file /etc/vim/vimrc.local 
+
+"auto complete config
+hi Pmenu ctermfg=white ctermbg=darkgrey guifg=white guibg=grey40
+hi PmenuSel ctermfg=lightgrey ctermbg=blue guifg=grey60 guibg=blue
