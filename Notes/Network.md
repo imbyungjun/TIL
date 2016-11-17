@@ -70,23 +70,24 @@ receiver side : segments를 다시 message로 조립하여 appl layer에 전달
 각각의 Segmentation( )은 source / destination port #를 갖는다.
 IP address + Port #으로 목표 socket에 접근.  
 
-1) UDP
-    Connectionless    (delay x)
-    No connection state
-    No congestion control
-    Destination = Dest IP addr + Dest Port #  
+1) UDP  
+    Connectionless    (delay x)  
+    No connection state  
+    No congestion control  
+    Destination = Dest IP addr + Dest Port #    
 
 * UDP segment format
 
 | Src Port # | Dest Port # |
 |:---------:|:-----------:|
 | Length     | Checksum  |
-| Application Data (message)||
+|| Application Data (message)|
 
 
-1) TCP
-	Connection oriented  
-	Destination = Src IP + Src Port # + Dest IP + Dest Port #  
+
+1) TCP  
+	Connection oriented    
+	Destination = Src IP + Src Port # + Dest IP + Dest Port #    
         
 
 
