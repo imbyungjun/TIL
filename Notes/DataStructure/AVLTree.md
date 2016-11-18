@@ -60,4 +60,94 @@ BF(X) = 2, there are 4 cases that we might have to fix
 1) An insertion in the **right subtree** of the **left child** of X.  
 2) An insertion in the **left subtree** of the **right child** of X.
 
+###AVL Balancing Operations: Rotations
+####Definition for Rotations
+* To switch children and parents among two or three adjacent nodes to resotre balance of a tree.
+* A rotation may change the depth of some nodes, but does not change their relative ordering.
 
+```
+		x1					   x2
+	   /	Single right      /  \
+	  x2		--->		x3    x1
+	 /
+	x3
+```
+```
+	x1						   x2
+	  \		Single left		  /  \
+	   x2		--->		 x1   x3
+		\
+		 x3
+```
+```
+	   x1					  x3
+	  /		Double right	 /  \
+	 x2			--->		x2   x1
+	  \
+	  x3
+```
+```
+     x1					      x3
+	   \	Double left		 /  \
+		x2		--->		x1  x2
+	   /
+	 x3
+```
+
+####LL rotation
+```
+		A						 B
+	  /   \					   /   \
+     B    ...		--->	 ...    A
+   /   \					/	  /   \
+ ...   ...				  ...	...   ...
+ /
+...
+```
+```
+Node *rotateLL(Node *A) {
+	Node *B = A->left;
+	A->left = B->right;
+	B->right = A;
+	return B;
+}
+```
+
+####RR rotation
+```
+	    A					    B
+	  /   \					  /   \
+    ...    B		--->	 A    ...
+	      / \			    / \     \
+        ...  ...	      ... ...   ...
+			   \
+			  ...
+```
+```
+Node *rotateRR(Node *A) {
+	Node *B = A->right;
+	A->right = B->left;
+	B->left = A;
+	return B;
+}
+```
+
+####LR rotation
+```
+		  A					 A			       C
+	    /   \			   /   \		     /    \
+       B    ...      	  C    ...          B      A
+     /  \		  -->    /  \		-->   /  \    /  \
+   ...   C         	    B   ...         ... ...  ... ...
+        /  \	   	   / \
+      ...  ...	 	 ... ...
+	  /
+     ...	?????
+```
+```
+Node *rotateLR(Node *A) {
+	Node *B = A->left;
+	A->left = rotateRR(B);
+	return rotateLL(A);
+}
+```
