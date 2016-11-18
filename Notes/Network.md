@@ -62,13 +62,13 @@ Sender / Receiver 간에 bits가 전달되는데 걸린 시간 비율 (bits / ti
     Client - Server와 P2P의 혼용
     ex) Skype
 
-2.2 Transport Layer
-sender side : app message를 segments로 나누어 network layer에 전달
-receiver side : segments를 다시 message로 조립하여 appl layer에 전달
+##2.2 Transport Layer  
+sender side : app message를 segments로 나누어 network layer에 전달  
+receiver side : segments를 다시 message로 조립하여 appl layer에 전달  
 
-각각의 Datagram(Network layer 정보단위)은 source IP, destination IP를 갖음.
-각각의 Segmentation( )은 source / destination port #를 갖는다.
-IP address + Port #으로 목표 socket에 접근.  
+각각의 Datagram(Network layer 정보단위)은 source IP, destination IP를 갖음.  
+각각의 Segmentation( )은 source / destination port #를 갖는다.  
+IP address + Port #으로 목표 socket에 접근.   
 
 1) UDP  
     Connectionless    (delay x)  
@@ -88,14 +88,15 @@ IP address + Port #으로 목표 socket에 접근.
 1) TCP  
 	Connection oriented    
 	Destination = Src IP + Src Port # + Dest IP + Dest Port #    
-        
+ 
+* TCP segment format
 
+|       
+##2.3 Network Layer
 
-2.3 Network Layer
+##2.4 Link Layer
 
-2.4 Link Layer
-
-2.5 Physical Layer
+##2.5 Physical Layer
 
 
 
