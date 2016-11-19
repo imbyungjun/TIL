@@ -141,13 +141,29 @@ Node *rotateRR(Node *A) {
    ...   C         	    B   ...         ... ...  ... ...
         /  \	   	   / \
       ...  ...	 	 ... ...
-	  /
-     ...	?????
 ```
 ```
 Node *rotateLR(Node *A) {
 	Node *B = A->left;
 	A->left = rotateRR(B);
 	return rotateLL(A);
+}
+```
+
+####RL rotation
+```
+		A			      A						C
+	  /   \			    /   \				  /   \
+	...    B		  ...    C				 A	   B
+		 /   \	 -->        /  \	-->		/  \  /  \
+	    C    ...		  ...   B		 ... ... ... ...
+	  /  \				 	   / \
+	...  ...				 ... ...
+```
+```
+Node *rotateRL(Node *A) {
+	Node *B = A->right;
+	A->right = rotateLL(B);
+	return rotateRR(A);
 }
 ```
