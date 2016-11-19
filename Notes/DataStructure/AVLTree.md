@@ -45,7 +45,7 @@ Take **O(log n)** time for searching, insertion, and deletion
     / \
    1   5		BF = 0
 ```
-
+--
 ###Rebalancing
 To maintain AVL tree, **rebalancing** is required.
 
@@ -60,6 +60,7 @@ BF(X) = 2, there are 4 cases that we might have to fix
 1) An insertion in the **right subtree** of the **left child** of X.  
 2) An insertion in the **left subtree** of the **right child** of X.
 
+--
 ###AVL Balancing Operations: Rotations
 ####Definition for Rotations
 * To switch children and parents among two or three adjacent nodes to resotre balance of a tree.
