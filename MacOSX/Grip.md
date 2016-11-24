@@ -21,3 +21,8 @@ $ grip 8080
 ```
 $ grip --gfm --context=username/repo issue.md
 ```
+
+###Export markdown to html
+```
+$ grip my_file.md --export my_file.html
+```
