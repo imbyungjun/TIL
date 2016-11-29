@@ -78,9 +78,32 @@ Edges for Kn = n(n-1)/2
 Every graph is a subgraph of Kn  
 ![img](./complete_graph.png )
 
+###Bipartite graphs
+A **biparite** graph G is a graph such that 
+```
+V(G) = V(G1) ∪ V(G2)
+|V(G1)| = m, |V(G2)| = n
+V(G1) ∩ V(G2) = ∅
+No edges exist between any two vertices in the same subset V(Gk), k = 1, 2
+```
+![img](./bipartite_graph.png)
+
+###Complete bipartite graph Km,n
+
+A bipartite graph is the *complete* bipartite graph Km,n   
+if every vertex in V(G1) is joined to a vertex in V(G2) and conversely,  
+|V(G1)| = m  
+|V(G2)| = n
+
+![img](./complete_bipartite_graph.png)
+
 ###Connected graphs
-A graph is *connected* if every pair of vertices can be connected by a path.  
-(strongly connected : (a, b) 
+- A graph is *connected* if every pair of vertices can be connected by a path.  
+(strongly connected : (a, b) ∈ E, (b, a) ∈ E)   
+- Each connected subgraph of a non-connected graph G is called a componet of G  
+- Connectivity Number = Number of connected components  
+Connectivity number of G = C(G)
+- G is connected iff C(G) = 1
 
 
 --
