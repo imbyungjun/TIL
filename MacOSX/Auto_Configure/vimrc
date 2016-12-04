@@ -14,3 +14,7 @@ hi PmenuSel ctermfg=lightgrey ctermbg=blue guifg=grey60 guibg=blue
 
 "Highlight color
 hi Search cterm=NONE ctermbg=darkgrey ctermfg=white
+
+"Command
+:command Wq wq
+:command W w
