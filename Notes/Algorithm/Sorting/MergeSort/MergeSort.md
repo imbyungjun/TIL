@@ -15,6 +15,25 @@
 ####Example
 ![img](example.png)
 
+####Analysis
+배열을 각각 n/2개의 원소를 갖는 두 개의 부분배열로 분할 => O(n)
+
+각 단계마다 O(n)회의 merge 수행  
+O(logn) 개의 단계 존재
+
+Total time = O(nlogn)
+
+```
+T(n) = 		0		(n = 1)
+	   2T(n/2) + n 	(n > 1)
+
+=> O(nlogn)
+```
+
+
+
+
+
 ####Implementation
 ```
 #define MAX_SIZE 100
@@ -62,10 +81,3 @@ void main() {
 }
 ```
 
-####Analysis
-```
-T(n) = 		0		(n = 1)
-	   2T(n/2) + n 	(n > 1)
-
-=> O(nlogn)
-```
