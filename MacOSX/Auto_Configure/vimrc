@@ -18,3 +18,13 @@ hi Search cterm=NONE ctermbg=darkgrey ctermfg=white
 "Command
 :command Wq wq
 :command W w
+
+"Markdown highlighting
+augroup markdown
+	" remove previous autocmds
+	autocmd!
+
+	" set every new or raed *.md buffer to use the markdown filetype
+	autocmd BufRead,BufNew *.md set filetype=markdown
+
+augroup END
