@@ -1,17 +1,17 @@
 #Tree
 
-1. [Introduction](./#introduction)  
-1.1 [Tree Terminology](./#tree-terminology)
+1. [Introduction](#introduction)  
+1.1 [Tree Terminology](#tree-terminology)
 
-2. [Spanning Trees](./#spanning-trees)  
-2.1 [Tree Search](./#tree-search)
-2.2 [Minimum Spanning Tree(MST)](./#minimum-spanning-tree(MST))
+2. [Spanning Trees](#spanning-trees)  
+2.1 [Tree Search](#tree-search)
+2.2 [Minimum Spanning Tree(MST)](#minimum-spanning-tree(MST))
 
-3. [Binary Tree](./#binary-tree)  
-3.1 [Properties](./#properties)  
-3.2 [Tree Traversal](./#tree-traversal)  
-3.3 [Binary Search Tree(BST)](./binary-search-tree(BST))  
-3.4 [Other Properties of Trees](./other-properties-of-trees)  
+3. [Binary Tree](#binary-tree)  
+3.1 [Properties](#properties)  
+3.2 [Tree Traversal](#tree-traversal)  
+3.3 [Binary Search Tree(BST)](binary-search-tree(BST))  
+3.4 [Other Properties of Trees](other-properties-of-trees)  
 
 #Introduction
 A Graph is a **Tree** if graph is ***connected*** and ***acyclic***.
