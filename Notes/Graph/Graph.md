@@ -76,7 +76,7 @@ The complete graph Kn is the graph with n vertices and every pair of vertices is
 Figure represents K5, (when n >= 3)  
 Edges for Kn = n(n-1)/2  
 Every graph is a subgraph of Kn  
-![img](./complete_graph.png )
+![img](./img/complete_graph.png )
 
 ###Bipartite graphs
 A **biparite** graph G is a graph such that 
@@ -86,7 +86,7 @@ V(G) = V(G1) ∪ V(G2)
 V(G1) ∩ V(G2) = ∅
 No edges exist between any two vertices in the same subset V(Gk), k = 1, 2
 ```
-![img](./bipartite_graph.png)
+![img](./img/bipartite_graph.png)
 
 ###Complete bipartite graph Km,n
 
@@ -95,7 +95,7 @@ if every vertex in V(G1) is joined to a vertex in V(G2) and conversely,
 |V(G1)| = m  
 |V(G2)| = n
 
-![img](./complete_bipartite_graph.png)
+![img](./img/complete_bipartite_graph.png)
 
 ###Connected graphs
 - A graph is *connected* if every pair of vertices can be connected by a path.  
