@@ -4,7 +4,7 @@
 1.1 [Tree Terminology](#tree-terminology)
 
 2. [Spanning Trees](#spanning-trees)  
-2.1 [Tree Search](#tree-search)
+2.1 [Tree Search](#tree-search)  
 2.2 [Minimum Spanning Tree(MST)](#minimum-spanning-tree(MST))
 
 3. [Binary Tree](#binary-tree)  
@@ -48,20 +48,34 @@ there is a unique path from v to w
 Given a graph G, a tree T is a ***spanning tree*** of G iff;  
 **T is a subgraph of G** and **T contains all the vertices of G**
 ##Tree Search
+###Depth First Search (DFS)
+Using Stack
+
 ###Breadth First Search (BFS)
+Using Queue
+
 1) Let's start with 'a'  
 2) Add all edges (a, x), x = b to h, which does not create a cycle x = g, c, b at level 1 (a, g), (a, c), (a, b)  
 3) repeat this process at level 1
-
-
-###Depth First Search (DFS)
 
 ##Minimum Spanning Tree(MST)
 Given a weighted graph G, a ***minimum spanning tree*** is  
 **a spanning tree of G that has minimum "weight"**
 
 ###Kruskal's algorithm
+```
+begin
+T <- {0}
+m <- {0}
 
+while (m < n-1)
+	find smallest e
+	delete e from E
+	if addition of e to T does not produce cycle,
+	then add e to T
+		and set m = m + 1
+end while
+```
 
 ###Prim's algorithm
 
