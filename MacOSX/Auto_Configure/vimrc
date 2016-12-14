@@ -1,23 +1,29 @@
+"if you want to set configure for all users,
+"make file /etc/vim/vimrc.local 
+
 syntax enable
-set number
 filetype plugin indent on
+set number
 set tabstop=4
 set shiftwidth=4
 set hlsearch
 "set expandtab
-"if you want to set configure for all users,
-"make file /etc/vim/vimrc.local 
 
-"auto complete config
-hi Pmenu ctermfg=white ctermbg=darkgrey guifg=white guibg=grey40
-hi PmenuSel ctermfg=lightgrey ctermbg=blue guifg=grey60 guibg=blue
+"Auto complete config
+hi Pmenu ctermfg=white ctermbg=245
+hi PmenuSel ctermfg=lightgrey ctermbg=darkblue 
 
 "Highlight color
 hi Search cterm=NONE ctermbg=darkgrey ctermfg=white
 
+"Visual color
+hi Visual cterm=NONE ctermbg=darkgrey ctermfg=darkcyan
+
 "Command
-:command Wq wq
 :command W w
+:command Wq wq
+:command Q q
+:command WQ wq
 
 "Markdown highlighting
 augroup markdown
