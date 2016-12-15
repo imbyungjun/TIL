@@ -92,3 +92,14 @@ It will redirect you to a default editor to reset the most recent commit
 $ git rebase
 ```
 
+14 ) Update a branch from remote
+```
+$ git fetch remote_name
+```
+It only downloads the change locally
+
+```
+$ git pull remote_name
+```
+It fetches the newest changes from the remote origin and update your local copies (fetch + merge)
+
