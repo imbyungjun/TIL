@@ -7,6 +7,7 @@ set number
 set tabstop=4
 set shiftwidth=4
 set hlsearch
+set cursorline
 "set expandtab
 
 "Auto complete config
@@ -17,13 +18,31 @@ hi PmenuSel ctermfg=lightgrey ctermbg=darkblue
 hi Search cterm=NONE ctermbg=darkgrey ctermfg=white
 
 "Visual color
-hi Visual cterm=NONE ctermbg=darkgrey ctermfg=darkcyan
+hi Visual cterm=NONE ctermbg=darkgrey ctermfg=44
+
+"Empty lines(~) color
+hi NonText ctermfg=7
+
+"Line number color
+hi LineNr ctermfg=228
+
+"Statement color
+hi Statement ctermfg=228
+
+"String color
+hi String ctermfg=203
+
+"Number color
+hi Number ctermfg=203
+
+"CursorLine
+hi CursorLine cterm=BOLD
 
 "Command
 :command W w
 :command Wq wq
 :command Q q
-:command WQ wq
+command WQ wq
 
 "Markdown highlighting
 augroup markdown
@@ -34,3 +53,4 @@ augroup markdown
 	autocmd BufRead,BufNew *.md set filetype=markdown
 
 augroup END
+
