@@ -57,6 +57,9 @@ Date:   Wed Dec 14 21:43:27 2016 +0900
 
     Initial commit
 ```
+options :  
+ --graph : show in graph form  
+ --stat : show a summary of changes
 
 8 ) Share your change publicly
 ```
