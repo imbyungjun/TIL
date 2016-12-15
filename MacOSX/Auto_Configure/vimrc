@@ -42,7 +42,7 @@ hi CursorLine cterm=BOLD
 :command W w
 :command Wq wq
 :command Q q
-command WQ wq
+:command WQ wq
 
 "Markdown highlighting
 augroup markdown
