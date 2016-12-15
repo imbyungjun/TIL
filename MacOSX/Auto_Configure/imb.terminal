@@ -124,7 +124,7 @@
 	<key>FontAntialias</key>
 	<true/>
 	<key>FontWidthSpacing</key>
-	<real>0.99596774193548387</real>
+	<real>1.0223366477272728</real>
 	<key>ProfileCurrentVersion</key>
 	<real>2.04</real>
 	<key>SelectionColor</key>
@@ -169,6 +169,8 @@
 	<false/>
 	<key>name</key>
 	<string>imb</string>
+	<key>rowCount</key>
+	<integer>28</integer>
 	<key>shellExitAction</key>
 	<integer>0</integer>
 	<key>type</key>
