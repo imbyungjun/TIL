@@ -29,6 +29,9 @@ brew install tree
 # Install bash-completion
 brew install bash-completion
 
+# Install grip
+brew install grip
+
 ### End of installing basic utilies ###
 
 
