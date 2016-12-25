@@ -103,3 +103,24 @@ $ git pull remote_name
 ```
 It fetches the newest changes from the remote origin and update your local copies (fetch + merge)
 
+15 ) Reset all the changes
+```
+# --soft option will remain new files
+$ git reset --soft
+
+# --hard option will remove all new files
+$ git reset --hard
+```
+
+16 ) Save current changes before commit.
+```
+# Make the current working stage clean
+$ git stash
+
+# Restore the stashed result
+$ git stash list
+$ git stash apply STASH_ID
+```
+It is useful when you want to checkout to another branch, but you don't want to commit or push current changes.
+
+
