@@ -110,10 +110,85 @@ Array(any, ..., any) | Create array with given arguments
 
 ###5. Variable argument function
 
+```
+function sumAll() {
+	alert(typeof(arguments) + ' : ' + arguments.length);
+}
+
+sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9)
+```
+
+\* Result
+
+```
+object : 9
+```
+
+```
+function sumAll() {
+	var output = 0;
+	for (var i = 0; i < arguments.length; i++) {
+		output += arguments[i];
+	}
+	return output;
+}
+
+alert(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9);
+```
+
+\* Result
+
+```
+45
+```
 
 ###6. Return values
 
+```
+function func() {
+	alert("A");
+	return;
+	alert("B");
+}
+
+func();
+```
+
+\* Result 
+
+```
+A
+```
+
+```
+fucntion func() {
+	alert("A");
+	return;
+	alert("B");
+}
+
+var output = func();
+
+alert(typeof(output) + ' : ' + output);
+```
+
+\* Result
+
+```
+undefined : undefined
+```
+
 ###7. Inner function
+
+```
+function pythagoras(width, height) {
+	function square(x) {
+		return x * x;
+	}
+
+	return Math.sqrt(aquare(width) + square(height));
+}
+```
 
 ###8. Callback function
 
