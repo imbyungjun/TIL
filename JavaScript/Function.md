@@ -8,7 +8,7 @@
 
 [4. Arguments](#4-arguments)
 
-[5. 가변인자함수???](#5-가변인자함수???)
+[5. Variable argument function](#5-variable-argument-function)
 
 [6. Return values](#6-return-values)
 
@@ -23,7 +23,7 @@
 [11. Native functions in javascript](#11-native-functions-in-javascript)
 
 ###1. Anonymous function
-Anonymous function doesn't have a name but, it is a function.
+**Anonymous function** doesn't have a name but, it is a function.
 
 ```
 // Anonymous function
@@ -40,16 +40,155 @@ alert(typeof(func));
 ```
 
 ###2. Declarative function
+**Declarative function** has a name. Usually declare function like this way.
 
+```
+// Decalre fucntion
+function func() {
+	alert("Hello");
+}
+
+// Call func() function
+func();
+```
+
+\* Redeclaration of function
+
+```
+func();
+function func() { alert("A"); }
+function func() { alert("B"); }
+
+var foo = function() { alert("A"); };
+var foo = function() { alert("B"); };
+foo();
+```
+
+\* Result
+
+```
+B
+B
+```
 ###3. Arguments and return values
+Function can have arguments and a return value.
+
+```
+function func_name(arg1, arg2, arg3 ...) {
+	...
+	return ret_val;
+}
+```
 
 ###4. Arguments
+JavaScript allows that more or less arguments than specified.
 
-###5. 가변인자함수
+```
+var arr1 = Array();
+var arr2 = Array(10);
+var arr3 = Array(273, 103, 57, 32);
+
+alert(arr1 + '\n' + arr2 + '\n' + arr3);
+```
+
+\* Result
+
+```
+
+,,,,,,,,,
+273, 103, 57, 32
+```
+
+\* **3 types of Array( )**
+
+Form | Description
+:----:|:-----:
+Array( ) | Create empty array
+Array(Number) | Creat array that has size of *Number*
+Array(any, ..., any) | Create array with given arguments
+
+
+###5. Variable argument function
+
+```
+function sumAll() {
+	alert(typeof(arguments) + ' : ' + arguments.length);
+}
+
+sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9)
+```
+
+\* Result
+
+```
+object : 9
+```
+
+```
+function sumAll() {
+	var output = 0;
+	for (var i = 0; i < arguments.length; i++) {
+		output += arguments[i];
+	}
+	return output;
+}
+
+alert(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9);
+```
+
+\* Result
+
+```
+45
+```
 
 ###6. Return values
 
+```
+function func() {
+	alert("A");
+	return;
+	alert("B");
+}
+
+func();
+```
+
+\* Result 
+
+```
+A
+```
+
+```
+fucntion func() {
+	alert("A");
+	return;
+	alert("B");
+}
+
+var output = func();
+
+alert(typeof(output) + ' : ' + output);
+```
+
+\* Result
+
+```
+undefined : undefined
+```
+
 ###7. Inner function
+
+```
+function pythagoras(width, height) {
+	function square(x) {
+		return x * x;
+	}
+
+	return Math.sqrt(aquare(width) + square(height));
+}
+```
 
 ###8. Callback function
 
