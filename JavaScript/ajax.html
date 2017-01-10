@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="https://select2.github.io/css/bootstrap.css" type="text/css" rel="stylesheet" />
+  <link href="https://select2.github.io/dist/css/select2.min.css" type="text/css" rel="stylesheet" />
+  <link href="https://select2.github.io/css/s2-docs.css" type="text/css" rel="stylesheet" />
+  <title>JQeury</title>
+  
+  <input type="text"name="q" value="">
+  
+  <div id="result">
+  </div>
+  
+</head>
+<body id="body">
+</body>
+
+<script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous"></script>
+<script>
+
+function formatRepo (repo) {
+       var markup = "<div class='select2-result-repository clearfix'>" +
+        "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
+        "<div class='select2-result-repository__meta'>" +
+          "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+
+      if (repo.description) {
+        markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+      }
+
+      markup += "<div class='select2-result-repository__statistics'>" +
+        "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>" +
+        "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" +
+        "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>" +
+      "</div>" +
+      "</div></div>";
+
+      return markup;
+}  
+
+$(document).ready(function(){
+  $("input").keydown(function(){
+    $("input").css("background-color", "yellow");
+  });
+  $("input").keyup(function(){
+    $("input").css("background-color", "pink");
+    var query = $("input").val();
+    console.log($("input").val());
+
+    $.ajax({
+      url: 'https://api.github.com/search/repositories?q='+query+'&page=1',
+      type: 'GET',
+      cache: true,
+      dataType: 'json',
+      jsonp: 'callback',
+      success: function(result) {
+        /* 검색어 입력된 경우 내용 다 지우고 검색하여 다시 씀 */
+        $("#result").html("");
+        for (var i = 0; i < result.items.length; i++) {
+          $("#result").append(formatRepo(result.items[i]));
+        }
+      },
+      error: function(request, status, error) {
+        alert(error);
+      }
+    });
+    
+  });
+});
+
+var page = 1;
+$(window).scroll(function() {
+  var windowTop = $(window).scrollTop();
+  var docHeight = $(document).height();
+  var windowHeight = $(window).height();
+
+  if (windowTop == docHeight - windowHeight) {
+    var query = $("input").val();
+    page++;
+    console.log(page);
+    $.ajax({
+      url: 'https://api.github.com/search/repositories?q='+query+'&page='+page,
+      type: 'GET',
+      cache: true,
+      dataType: 'json',
+      jsonp: 'callback',
+      success: function(result) {
+        /* 스크롤한경우 뒷페이지 불러와서 이어붙임 */
+        for (var i = 0; i < result.items.length; i++) {
+          $("#result").append(formatRepo(result.items[i]));
+        }
+      },
+      error: function(request, status, error) {
+        alert(error);
+      }
+    });
+  }
+})
+
+</script>
+</html>
