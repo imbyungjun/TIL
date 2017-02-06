@@ -46,10 +46,9 @@ public class NoticeController {
 		
 		model.addAttribute("notice", noticeRepository.getNotice(seq - 1));
 		
-		return "content";
+		return "detail";
 	}
 	
-	@AuthCheck
 	@RequestMapping(value = "form")
 	public String addForm() {
 		return "addForm";

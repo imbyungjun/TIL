@@ -19,33 +19,26 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
-		logger.info("인터셉터로 들오긴했음");
-		
 		if (!(handler instanceof HandlerMethod)) {
 			return true;
 		}
-		
-		logger.info("HandlerMethod 이긴함.");
-		
+
 		AuthCheck authCheck = ((HandlerMethod) handler).getMethodAnnotation(AuthCheck.class);
 		
 		if (authCheck == null) {
 			return true;
 		}
 		
-		logger.info("authCheck가 null은 아님");
-		
 		Cookie[] cookies = req.getCookies();
-		
+		 
 		for (Cookie c : cookies) {
 			if (c.getName().equals("noticeAdmin") && c.getValue().equals("admin")) {
+				logger.info("cookie : " + c.getName() + c.getValue());
 				return true;
 			}
 		}
 		
-		logger.info("쿠키들 뒤져봤는데 일치하는게 없네");
-		
-		res.sendRedirect("/login/form/");
+		res.sendRedirect("/login/form");
 		return false;
 	}
 
