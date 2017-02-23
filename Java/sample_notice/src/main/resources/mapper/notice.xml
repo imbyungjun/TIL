@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nts.intern.dao.NoticeRepository">
+    <select id="getNoticeList" parameterType="map" resultType="com.nts.intern.vo.Notice">
+        SELECT
+        	seq
+        	,title
+        	,content
+        	,userId
+        FROM notice 
+        ORDER BY seq DESC 
+        OFFSET #{offset}
+   		LIMIT #{count} 
+    </select>
+    
+    <select id="getNotice" parameterType="int" resultType="com.nts.intern.vo.Notice">
+		SELECT
+			seq
+			, title
+			, content
+			, userId
+		FROM notice
+		WHERE seq=#{seq}
+	</select>
+	
+	<update id="saveNotice" parameterType="com.nts.intern.vo.Notice">
+		INSERT INTO notice(seq, title, content, userId)
+		VALUES(#{seq}, #{title}, #{content}, #{userId})
+		ON DUPLICATE KEY UPDATE title=#{title}, content=#{content}, userId=#{userId}
+	</update>
+	
+</mapper> 
