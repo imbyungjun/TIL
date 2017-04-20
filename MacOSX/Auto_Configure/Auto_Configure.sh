@@ -32,6 +32,9 @@ brew install bash-completion
 # Install grip
 brew install grip
 
+# Install Maven3
+brew install maven
+
 ### End of installing basic utilies ###
 
 
@@ -58,7 +61,7 @@ defaults write com.apple.dashboard mcx-disabled -boolean YES && killall Dock
 mkdir /Users/imb/Desktop/ScreenShots
 
 # Change default location for screen capture
-defaults write com.apple.screencapture location /Users/imb/Desktop/ScreenShots
+defaults write com.apple.screencapture location ~/Desktop/ScreenShots
 
 # Reset SystemUIServer
 killall SystemUIServer
