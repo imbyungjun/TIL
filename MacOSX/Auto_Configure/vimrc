@@ -54,3 +54,5 @@ augroup markdown
 
 augroup END
 
+"TERM 
+set term=screen-256color
