@@ -49,6 +49,45 @@ Stream API는 단순히 stream을 parallelStream으로 변경하는 것만으로
 
 ## Filter, Map, FlatMap 메서드
 
+### Filter
+Filter는 입력 스트림에서 데이터를 읽어서 특정 조건에 부합하는 데이터들을 추려내어 새로운 스트림으로 반환한다. Filter는 [Predicate&lt;T&gt;](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html)를 매개변수로 입력받는다. 쉽게말해서 해당 스트림의 타입 T를 매개변수 전달받고 boolean을 리턴하는 함수이다.
+
+ex) 사람 스트림중 나이가 20살보다 적은 사람만을 얻는 필터
+```
+Stream<Person> youngPeople = people.filter(person -> person.getAge() < 20);
+```
+
+### Map
+
+
+### FlatMap
+
+
+## 서브스트림 추출과 스트림 결합
+`stream.limit(n)` 메서드는 n개 요소 이후(원본 스트림이 n보다 짧은 경우는 원본 스트림이 끝날 때) 끝나는 새로운 스트림을 리턴한다. 이 메서드는 무한 스트림을 필요한 크기로 잘라낼 때 유용하다. 
+
+ex) 100개의 난수를 포함하는 스트림
+```
+Stream<Double> randoms = Stream.generate(Math::random).limit(100);
+```
+
+`stream.skip(n)` 메서드는 처음 n개 요소를 버린다.
+
+`stream.peek()` 메서드는 원본과 동일한 스트림을 리턴하면서 전달받은 함수를 요소마다 수행한다. 디버깅에 유용하다.  
+[Stream Peek vs ForEach](https://stackoverflow.com/questions/33635717/in-java-streams-is-peek-really-only-for-debugging)
+
+`Stream.concat()` 메서드는 매개변수로 전달되는 두 스트림을 연결시킨다. 첫번째 스트림이 무한 스트림일 경우엔 연결이 불가능하다.
+
+ex) 무한 스트림에 다른 스트림을 연결하는 예제
+```
+Stream<Double> one = Stream.generate(Math::random);     // 무한 스트림
+Stream<Double> another = Stream.of(1.0, 2.0, 0.3, 0.4);
+
+Stream<Double> concat = Stream.concat(one, another);
+```
+위 예제를 실행할 경우 아무런 이상이 없이 프로그램이 종료한다. 그 이유는 해당 스트림을 사용하지 않았기 때문에 `Lazy evaluation`에 의해서 스트림을 실질적으로 생성하기위한 무한 반복을 수행하지 않기 때문이다. 만약 위 예제에서 one 또는 concat 스트림을 호출할 경우 예외는 발생하지 않지만 무한 스트림을 생성하기 위해서 무한 반복을 수행한다.
+
+## 상태 유지 변환
 
 
 ## Reference
