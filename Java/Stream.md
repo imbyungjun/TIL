@@ -93,7 +93,7 @@ Stream<Double> concat = Stream.concat(one, another);
 필터 또는 맵핑된 스트림에서 요소를 추출할 때 결과가 이전 요소에 의존하지 않는다`stateless transformation`. 상태에 의존적인 변환`stateful transformation`의 예로 `distinct()` 메서드가 있다. distinct() 메서드는 원본 스트림에서 중복되는 요소들을 제거하여 원본과 같은 순서를 갖는 스트림을 출력한다.
 
 `sorted()` 메서드도 상태에 의존적이다. 가장 마지막 요소까지 정렬하기 전까지의 정렬 상태를 유지해야한다. sorted() 메서드는 Comparable 인터페이스를 구현한 요소들을 정렬하거나 매개변수로 Comparator를 전달받아서 정렬을 수행한다.  
-[Stream.sort() 사용하기](../StreamSort.md)
+[Stream.sort() 사용하기](StreamSort.md)
 > Collections.sort 메서드는 컬렉션을 직접 정렬한다.
 > Stream.sorted 메서드는 정렬된 새로운 스트림을 리턴한다.
 
