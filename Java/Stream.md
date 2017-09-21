@@ -2,6 +2,8 @@
 ### 목차
 1. [Stream](#stream_1)
 2. [Filter, Map, FlatMap 메서드](#filter-map-flatmap)
+3. [서브스트림 추출과 스트림 결합](#_2)
+4. [상태 유지 변환](#_3)
 
 ## Stream
 Java 8에서 추가된 API로 기존의 Iterator과 Collection을 보다 편리하게 사용할 수 있게 해준다.  
@@ -88,7 +90,12 @@ Stream<Double> concat = Stream.concat(one, another);
 위 예제를 실행할 경우 아무런 이상이 없이 프로그램이 종료한다. 그 이유는 해당 스트림을 사용하지 않았기 때문에 `Lazy evaluation`에 의해서 스트림을 실질적으로 생성하기위한 무한 반복을 수행하지 않기 때문이다. 만약 위 예제에서 one 또는 concat 스트림을 호출할 경우 예외는 발생하지 않지만 무한 스트림을 생성하기 위해서 무한 반복을 수행한다.
 
 ## 상태 유지 변환
+필터 또는 맵핑된 스트림에서 요소를 추출할 때 결과가 이전 요소에 의존하지 않는다`stateless transformation`. 상태에 의존적인 변환`stateful transformation`의 예로 `distinct()` 메서드가 있다. distinct() 메서드는 원본 스트림에서 중복되는 요소들을 제거하여 원본과 같은 순서를 갖는 스트림을 출력한다.
 
+`sorted()` 메서드도 상태에 의존적이다. 가장 마지막 요소까지 정렬하기 전까지의 정렬 상태를 유지해야한다. sorted() 메서드는 Comparable 인터페이스를 구현한 요소들을 정렬하거나 매개변수로 Comparator를 전달받아서 정렬을 수행한다.  
+[Stream.sort() 사용하기](../StreamSort.md)
+> Collections.sort 메서드는 컬렉션을 직접 정렬한다.
+> Stream.sorted 메서드는 정렬된 새로운 스트림을 리턴한다.
 
 ## Reference
 **Java SE 8 for the Really Impatient: A Short Course on the Basics** by Cay S. Horstmann
