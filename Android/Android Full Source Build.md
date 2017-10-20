@@ -12,7 +12,7 @@ Ubuntu 14.04 LTS
 #### JDK
 Marshmallow 버전의 빌드를 위해서는 OpenJDK 7버전을 필요로한다. 아래의 명령어를 입력해서 설치한다.
 ```
-$ apt-get install openjdk-7-jre
+$ apt-get install openjdk-7-jdk
 ```
 Java 환경 변수 설정 (~/.bashrc 파일에 아래 내용 추가)
 ```
