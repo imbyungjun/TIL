@@ -44,13 +44,13 @@ Subject와 Observer가 각자 자신의 값을 정확하게 유지하기 위해�
 2. 사용자가 적절하게 notify()를 호출하는 책임을 지도록 한다. 이렇게하면 사용자가 일련의 상태 변경이 될 때까지 갱신의 시작을 미룰 수 있다. 그렇기 때문에 중간 중간 불필요한 수정이 일어나지 않는다. 단점은 사용자가 수정하게 하는 추가적인 행동을 정의하도록 해야한다. 사용자가 notify()의 호출을 잊는 경우가 많아서 오류 발생이 증가한다.
 
 ## 예제 코드
-```
+```java
 public interface Observer {
     void update(Subject changedSubject);
 }
 ```
 
-```
+```java
 public abstract class Subject {
     private List<Observer> observers = new ArrayList<>();
 
@@ -68,7 +68,7 @@ public abstract class Subject {
 }
 ```
 
-```
+```java
 public class DateCounter extends Subject {
     private Date date = new Date();
 
@@ -83,7 +83,7 @@ public class DateCounter extends Subject {
 }
 ```
 
-```
+```java
 public class SimpleDatePrinter implements Observer {
     private DateCounter dateCounter;
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -107,7 +107,7 @@ public class SimpleDatePrinter implements Observer {
 }
 ```
 
-```
+```java
 public class FullDatePrinter implements Observer {
     private DateCounter dateCounter;
 
@@ -130,7 +130,7 @@ public class FullDatePrinter implements Observer {
 }
 ```
 
-```
+```java
 public class Main {
     public static void main(String[] args) {
         DateCounter dateCounter = new DateCounter();
