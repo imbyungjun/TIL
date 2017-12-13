@@ -2,10 +2,10 @@
 소켓의 동작 방식은 블로킹 모드와 논블로킹 모드로 나뉜다. 블로킹은 요청한 작업이 성공하거나 에러가 발생하기 전까지는 응답을 돌려주지 않는 것을 말하며 논블로킹은 요청한 작업의 성공 여부와 상관없이 바로 결과를 돌려주는 것을 말한다. 이때 요청의 응답값에 의해서 에러나 성공 여부를 판단한다.
 
 ## Blocking
-자바에서 블로킹 소켓은 ServerSocket, Socket 클래스로 구현되어있다.
+자바에서 블로킹 소켓은 **ServerSocket**, **Socket** 클래스로 구현되어있다.
 
 **Blocking 모드의 서버**
-```
+```java
 public class BlockingServer {
 	public static void main(String[] args) throws Exception {
 		BlockingServer server = new BlockingServer();
@@ -57,8 +57,8 @@ public class BlockingServer {
 결국 블로킹 소켓의 동작 방식으로 인하여 블로킹 소켓을 사용한 서버는 충분히 많은 동시접속 사용자를 수용하지 못한다. 이런 단점을 개선한 방식이 논블로킹  소켓 방식이다.
 
 ## 논블로킹 소켓
-자바에서 논블로킹 소켓은 ServerSocketChannel, SocketChannel 클래스로 구현되어있다.
-```
+자바에서 논블로킹 소켓은 **ServerSocketChannel**, **SocketChannel** 클래스로 구현되어있다.
+```java
 public class NonBlockingServer {
 	private Map<SocketChannel, List<byte[]>> keepDataTrack = new HashMap<>();
 	private ByteBuffer buffer = ByteBuffer.allocate(2 * 1024);
