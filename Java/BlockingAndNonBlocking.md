@@ -7,33 +7,33 @@
 **Blocking 모드의 서버**
 ```java
 public class BlockingServer {
-	public static void main(String[] args) throws Exception {
-		BlockingServer server = new BlockingServer();
-		server.run();
-	}
+    public static void main(String[] args) throws Exception {
+        BlockingServer server = new BlockingServer();
+        server.run();
+    }
 
-	private void run() throws IOException {
-		ServerSocket server = new ServerSocket(8888);
-		System.out.println("Waiting for client...");
+    private void run() throws IOException {
+        ServerSocket server = new ServerSocket(8888);
+        System.out.println("Waiting for client...");
 
-		while (true) {
-			Socket sock = server.accept();
-			System.out.println("Client is connected");
+        while (true) {
+            Socket sock = server.accept();
+            System.out.println("Client is connected");
 
-			OutputStream out = sock.getOutputStream();
-			InputStream in = sock.getInputStream();
+            OutputStream out = sock.getOutputStream();
+            InputStream in = sock.getInputStream();
 
-			while (true) {
-				try {
-					int request = in.read();
-					out.write(request);
-				} catch (IOException e) {
-					System.out.println("Client is disconnected");
-					break;
-				}
-			}
-		}
-	}
+            while (true) {
+                try {
+                    int request = in.read();
+                    out.write(request);
+                } catch (IOException e) {
+                    System.out.println("Client is disconnected");
+                    break;
+                }
+            }
+        }
+    }
 }
 ```
 1. 클라이언트가 서버로 연결 요청을 보내면 서버는 연결을 수락하고 클라이언트와 연결된 소켓을 새로 생성하는데 이때 해당 메서드의 처리가 완료되기 전까지 스레드의 블로킹이 발생한다.
@@ -60,115 +60,115 @@ public class BlockingServer {
 자바에서 논블로킹 소켓은 **ServerSocketChannel**, **SocketChannel** 클래스로 구현되어있다.
 ```java
 public class NonBlockingServer {
-	private Map<SocketChannel, List<byte[]>> keepDataTrack = new HashMap<>();
-	private ByteBuffer buffer = ByteBuffer.allocate(2 * 1024);
+    private Map<SocketChannel, List<byte[]>> keepDataTrack = new HashMap<>();
+    private ByteBuffer buffer = ByteBuffer.allocate(2 * 1024);
 
-	private void startEchoServer() {
-		try (
-			Selector selector = Selector.open();
-			ServerSocketChannel serverSocketChannel = ServerSocketChannel.open() ) {
+    private void startEchoServer() {
+        try (
+            Selector selector = Selector.open();
+            ServerSocketChannel serverSocketChannel = ServerSocketChannel.open() ) {
 
-			if (serverSocketChannel.isOpen() && selector.isOpen()) {
-				serverSocketChannel.configureBlocking(false);
-				serverSocketChannel.bind(new InetSocketAddress(8888));
+            if (serverSocketChannel.isOpen() && selector.isOpen()) {
+                serverSocketChannel.configureBlocking(false);
+                serverSocketChannel.bind(new InetSocketAddress(8888));
 
-				serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-				System.out.println("Waiting for clients ...");
+                serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+                System.out.println("Waiting for clients ...");
 
-				while (true) {
-					selector.select();
-					Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
+                while (true) {
+                    selector.select();
+                    Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
 
-					while (keys.hasNext()) {
-						SelectionKey key = (SelectionKey) keys.next();
-						keys.remove();
+                    while (keys.hasNext()) {
+                        SelectionKey key = (SelectionKey) keys.next();
+                        keys.remove();
 
-						if (key.isValid() == false) {
-							continue;
-						}
+                        if (key.isValid() == false) {
+                            continue;
+                        }
 
-						if (key.isAcceptable()) {
-							acceptOP(key, selector);
-						} else if (key.isReadable()) {
-							readOP(key);
-						} else if (key.isWritable()) {
-							writeOP(key);
-						} else {
-							System.out.println("Fail to create ServerSocket");
-						}
-					}
-				}
-			}
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-	}
+                        if (key.isAcceptable()) {
+                            acceptOP(key, selector);
+                        } else if (key.isReadable()) {
+                            readOP(key);
+                        } else if (key.isWritable()) {
+                            writeOP(key);
+                        } else {
+                            System.out.println("Fail to create ServerSocket");
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 
-	private void acceptOP(SelectionKey key, Selector selector) throws IOException {
-		ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
-		SocketChannel socketChannel = serverSocketChannel.accept();
-		socketChannel.configureBlocking(false);
+    private void acceptOP(SelectionKey key, Selector selector) throws IOException {
+        ServerSocketChannel serverSocketChannel = (ServerSocketChannel) key.channel();
+        SocketChannel socketChannel = serverSocketChannel.accept();
+        socketChannel.configureBlocking(false);
 
-		System.out.println("Client is connected : " + socketChannel.getRemoteAddress());
+        System.out.println("Client is connected : " + socketChannel.getRemoteAddress());
 
-		keepDataTrack.put(socketChannel, new ArrayList<byte[]>());
-		socketChannel.register(selector, SelectionKey.OP_READ);
-	}
+        keepDataTrack.put(socketChannel, new ArrayList<byte[]>());
+        socketChannel.register(selector, SelectionKey.OP_READ);
+    }
 
-	private void readOP(SelectionKey key) {
-		try {
-			SocketChannel socketChannel = (SocketChannel) key.channel();
-			buffer.clear();
-			int numRead = -1;
+    private void readOP(SelectionKey key) {
+        try {
+            SocketChannel socketChannel = (SocketChannel) key.channel();
+            buffer.clear();
+            int numRead = -1;
 
-			try {
-				numRead = socketChannel.read(buffer);
-			} catch (IOException e) {
-				System.out.println("읽기 에러");
-			}
+            try {
+                numRead = socketChannel.read(buffer);
+            } catch (IOException e) {
+                System.out.println("읽기 에러");
+            }
 
-			if (numRead > -1) {
-				byte[] data = new byte[numRead];
-				System.arraycopy(buffer.array(), 0, data, 0, numRead);
-				System.out.println(new String(data, "UTF-8") + " from " + socketChannel.getRemoteAddress());
-				doEchoJob(key, data);
-			} else {
-				keepDataTrack.remove(socketChannel);
-				System.out.println("클라이언트 종료 : " + socketChannel.getRemoteAddress());
-				socketChannel.close();
-				key.cancel();
-			}
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-	}
+            if (numRead > -1) {
+                byte[] data = new byte[numRead];
+                System.arraycopy(buffer.array(), 0, data, 0, numRead);
+                System.out.println(new String(data, "UTF-8") + " from " + socketChannel.getRemoteAddress());
+                doEchoJob(key, data);
+            } else {
+                keepDataTrack.remove(socketChannel);
+                System.out.println("클라이언트 종료 : " + socketChannel.getRemoteAddress());
+                socketChannel.close();
+                key.cancel();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 
-	private void writeOP(SelectionKey key) throws IOException {
-		SocketChannel socketChannel = (SocketChannel) key.channel();
+    private void writeOP(SelectionKey key) throws IOException {
+        SocketChannel socketChannel = (SocketChannel) key.channel();
 
-		List<byte[]> channelData = keepDataTrack.get(socketChannel);
-		Iterator<byte[]> its = channelData.iterator();
+        List<byte[]> channelData = keepDataTrack.get(socketChannel);
+        Iterator<byte[]> its = channelData.iterator();
 
-		while (its.hasNext()) {
-			byte[] it = its.next();
-			its.remove();
-			socketChannel.write(ByteBuffer.wrap(it));
-		}
+        while (its.hasNext()) {
+            byte[] it = its.next();
+            its.remove();
+            socketChannel.write(ByteBuffer.wrap(it));
+        }
 
-		key.interestOps(SelectionKey.OP_READ);
-	}
+        key.interestOps(SelectionKey.OP_READ);
+    }
 
-	private void doEchoJob(SelectionKey key, byte[] data) {
-		SocketChannel socketChannel = (SocketChannel) key.channel();
-		List<byte[]> channelData = keepDataTrack.get(socketChannel);
-		channelData.add(data);
+    private void doEchoJob(SelectionKey key, byte[] data) {
+        SocketChannel socketChannel = (SocketChannel) key.channel();
+        List<byte[]> channelData = keepDataTrack.get(socketChannel);
+        channelData.add(data);
 
-		key.interestOps(SelectionKey.OP_WRITE);
-	}
+        key.interestOps(SelectionKey.OP_WRITE);
+    }
 
-	public static void main(String[] args) {
-		NonBlockingServer server = new NonBlockingServer();
-		server.startEchoServer();
-	}
+    public static void main(String[] args) {
+        NonBlockingServer server = new NonBlockingServer();
+        server.startEchoServer();
+    }
 }
 ```
