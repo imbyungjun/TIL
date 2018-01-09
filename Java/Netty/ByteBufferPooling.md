@@ -52,7 +52,7 @@ public class CreateByteBufferByNettyTest {
 }
 ```
 
-### Direct ByteBuffer VS Heap ByteBuffer
+## Direct ByteBuffer VS Heap ByteBuffer
 기본적으로 자바에서 "new" 키워드를 이용해서 생성되는 객체들은 모두 Heap 메모리 영역에 할당된다.  
 Heap ByteBuffer(Non Direct ByteBuffer)는 byte 배열에 추가적인 기능을 제공하는 wrapper 클래스이다. Heap 메모리 영역에 할당된다.  
 Direct ByteBuffer는 운영체제에서 관리하는 메모리 영역에 할당된다. Non Direct ByteBuffer 보다 더 빠른 읽기/쓰기 성능을 갖는다.
