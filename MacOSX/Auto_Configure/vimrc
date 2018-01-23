@@ -54,5 +54,9 @@ augroup markdown
 
 augroup END
 
-"TERM 
+"TERM setting
 set term=screen-256color
+
+"Duplicate a line shortcut
+nnoremap D yyp
+vnoremap D y`>pgv
