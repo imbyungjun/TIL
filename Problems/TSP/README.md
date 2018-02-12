@@ -42,11 +42,11 @@ g(4, null) = C[4][1]
 |3| | | | | | |
 |4| | | | | | |
 
-## 소스 코드
-[TSP.py](./TSP.py)
-
 ## 문제 링크
 [외판원 순회](https://www.acmicpc.net/problem/2098)
+
+## 소스 코드
+[TSP.py](./TSP.py)
 
 ## Reference
 https://en.m.wikipedia.org/wiki/Held%E2%80%93Karp_algorithm
