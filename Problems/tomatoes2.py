@@ -3,6 +3,11 @@
 from Queue import Queue
 
 
+w, d, h = map(int, raw_input().split())
+tomatoes = {}
+next_pos = [(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]
+
+
 def full_filled():
     for height in range(h):
         for row in range(d):
@@ -33,23 +38,9 @@ def find_current():
 
 
 def run():
-    global w, d, h
-    w, d, h = map(int, raw_input().split())
-
-    global tomatoes
-    tomatoes = {}
-    for height in range(h):
-        for row in range(d):
-            col = 0
-            for n in raw_input().split():
-                tomatoes[row, col, height] = int(n)
-                col += 1
-
     days = -1
-    current = Queue()  # put / get
+    current = Queue()
     next = Queue()
-
-    next_pos = [(1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1)]
 
     for pos in find_current():
         current.put(pos)
@@ -57,8 +48,6 @@ def run():
     while not current.empty():
         while not current.empty():
             row, col, height = current.get()
-            # tomatoes[row, col, height] = 1
-            # print "current:", row, col, height
 
             for direction in next_pos:
                 pos = (row + direction[0], col + direction[1], height + direction[2])
@@ -83,4 +72,11 @@ def run():
 
 
 if __name__ == '__main__':
+    for height in range(h):
+        for row in range(d):
+            col = 0
+            for n in raw_input().split():
+                tomatoes[row, col, height] = int(n)
+                col += 1
+
     print run()
