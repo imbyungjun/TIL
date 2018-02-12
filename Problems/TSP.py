@@ -13,16 +13,24 @@ def travel(to, visit):
     # print "travel(", to, ",", "{0:b}".format(visit), ")"
 
     # Already visited
-    if dp[to][visit] >= 0:
+    if dp[to][visit] > 0:
         return dp[to][visit]
 
     # g(to, null)
     if (1 << N) - 1 == visit:
-        return cost[to][0]
+        if cost[to][0] == 0:
+            return INF
+        else:
+            return cost[to][0]
 
     for i in range(N):
-        if visit & (1 << i) :
+        # visited
+        if visit & (1 << i):
             continue
+
+        if cost[to][i] == 0:
+            continue
+
         sum = cost[to][i] + travel(i, visit | (1 << i))
 
         if sum < min:
@@ -35,6 +43,6 @@ def travel(to, visit):
 if __name__ == '__main__':
     for i in range(N):
         cost.append([int(n) for n in raw_input().split()])
-        dp.append([-1] * (1 << N+1))
+        dp.append([-1] * (1 << N))
 
     print travel(0, 1)
