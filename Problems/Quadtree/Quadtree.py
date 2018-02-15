@@ -17,6 +17,7 @@ def quad_tree(n):
             left_down = matrix[i+1][j]
             right_down = matrix[i+1][j+1]
 
+            # 네 점의 값이 같은 것만으로 비교하면 1 또는 0이 아닌 값도 압축하게 됨에 유의
             if left_up == right_up == left_down == right_down == '1' or \
                     left_up == right_up == left_down == right_down == '0':
                 matrix[row][col] = left_up
