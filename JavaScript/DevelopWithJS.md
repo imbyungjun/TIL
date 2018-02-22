@@ -164,6 +164,52 @@ function diamond(n) {
     console.log(result.substr(0, result.length-1));
 }
 ```
+### 키보드 방향키로 특정 요소 움직이기
+```
+<!DOCTYPE html>
+<html>
+<body>
+<div id="map" style="width: 500px; height: 500px; background-color: #CCC">
+<div id="player" style="width: 50px; height: 50px; background-color: green; position: absolute; left:250px; top: 250px"></div>
+</div>
+<script type="text/javascript">
+    var KEY_LEFT = 37;
+    var KEY_UP = 38;
+    var KEY_RIGHT = 39;
+    var KEY_DOWN = 40;
+
+    var player = document.getElementById('player');
+
+    var direction = {};
+    var move = 3;
+
+    window.onkeydown = function(e) {
+        direction[e.keyCode] = true;
+    };
+
+    window.onkeyup = function(e) {
+        direction[e.keyCode] = false;
+    }
+
+    function newv(v, a, b) {
+        var next = parseInt(v, 10) - (direction[a] ? move : 0) + (direction[b] ? move : 0);
+        return next < 0 ? 0 : next > 500 ? 500 : next;
+    }
+
+    setInterval(setPlayerPosition, 10);
+
+    function setPlayerPosition() {
+        var left = parseInt(player.style.left);
+        var top = parseInt(player.style.top);
+
+        player.style.left = newv(left, 37, 39) + "px";
+        player.style.top = newv(top, 38, 40) + "px";
+    }
+</script>
+</body>
+</html>
+```
+
 
 ## Reference
 https://developer.mozilla.org/ko/docs/Learn/JavaScript/First_steps/What_is_JavaScript
