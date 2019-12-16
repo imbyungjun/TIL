@@ -49,4 +49,6 @@ mysql> SHOW GRANTS FOR 'user_name'@'localhost';
 | GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP ON `homework`.* TO 'imb'@'%' |
 +---------------------------------------------------------------------------------+
 ```
+
+### References
 [Link to mysql manual page](http://dev.mysql.com/doc/refman/5.7/en/adding-users.html)
