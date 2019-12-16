@@ -52,3 +52,5 @@ mysql> SHOW GRANTS FOR 'user_name'@'localhost';
 
 ### References
 [Link to mysql manual page](http://dev.mysql.com/doc/refman/5.7/en/adding-users.html)
+
+^^
