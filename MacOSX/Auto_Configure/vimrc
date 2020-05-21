@@ -39,6 +39,7 @@ hi Number ctermfg=203
 
 "CursorLine
 hi CursorLine cterm=BOLD
+hi CursorLineNR cterm=BOLD
 
 "Command
 :command W w
